@@ -1,0 +1,216 @@
+<main class="home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <video autoplay muted loop class="hero-video">
+        <source src="/assets/videos/hero-video.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="container">
+        <!-- <div class="hero-logo">
+          <img src="/assets/images/logo.png" alt="CJACO Logo" class="logo-image">
+        </div> -->
+        <h1 class="hero-title">
+          Une action,
+          <span class="gradient-text"> Une perspective !</span>
+        </h1>
+        <p class="hero-subtitle">
+          Fondée en 2012 par des jeunes pour lutter contre le VIH/SIDA, 
+          CJACO promeut le développement durable en encourageant la participation 
+          citoyenne des jeunes, femmes et personnes vulnérables, 
+          alignée sur les ODD 8, 13 et 16.
+        </p>
+        <div class="hero-actions">
+          <a href="#impact" class="btn btn-primary">Découvrir notre impact</a>
+          <a routerLink="/contact" class="btn btn-outline">Nous rejoindre</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span class="scroll-text">Faire défiler</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats" id="impact">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item" *ngFor="let stat of stats">
+          <div class="stat-number">{{ stat.number }}</div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Notre Mission</span>
+        <h2 class="section-title">Un Engagement pour l'Humanité</h2>
+        <p class="section-subtitle">
+          Nous œuvrons chaque jour pour créer des opportunités, bâtir des ponts entre les communautés
+          et favoriser un développement durable et inclusif.
+        </p>
+      </div>
+
+      <div class="mission-grid">
+        <div class="mission-card">
+          <div class="mission-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3>Éducation</h3>
+          <p>Favoriser l'accès à une éducation de qualité pour tous, sans distinction.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <h3>Santé</h3>
+          <p>Améliorer l'accès aux soins de santé dans les communautés les plus vulnérables.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3>Environnement</h3>
+          <p>Promouvoir la protection de l'environnement et le développement durable.</p>
+        </div>
+
+        <div class="mission-card">
+          <div class="mission-icon">
+            <i class="fas fa-hands-helping"></i>
+          </div>
+          <h3>Solidarité</h3>
+          <p>Renforcer les liens sociaux et la cohésion des communautés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nos Projets</span>
+        <h2 class="section-title">Actions Concrètes, Impact Réel</h2>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-image">
+            <img src="/assets/projects/education.jpg" alt="Projet Education">
+            <div class="project-overlay">
+              <a href="#" class="project-link">Voir le projet</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Éducation</div>
+            <h3 class="project-title">École Numérique Rural</h3>
+            <p class="project-description">
+              Mise en place de salles informatiques dans 20 écoles rurales,
+              touchant plus de 2000 élèves.
+            </p>
+            <div class="project-meta">
+              <span class="project-location">Mali, Sénégal</span>
+              <span class="project-status">En cours</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-image">
+            <img src="/assets/projects/health.jpg" alt="Projet Santé">
+            <div class="project-overlay">
+              <a href="#" class="project-link">Voir le projet</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Santé</div>
+            <h3 class="project-title">Centres de Santé Communautaires</h3>
+            <p class="project-description">
+              Construction et équipement de centres de santé dans les zones reculées
+              pour améliorer l'accès aux soins.
+            </p>
+            <div class="project-meta">
+              <span class="project-location">Burkina Faso</span>
+              <span class="project-status">Terminé</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-image">
+            <img src="/assets/projects/environment.jpg" alt="Projet Environnement">
+            <div class="project-overlay">
+              <a href="#" class="project-link">Voir le projet</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Environnement</div>
+            <h3 class="project-title">Reforestation Communautaire</h3>
+            <p class="project-description">
+              Programme de plantation d'arbres impliquant les communautés locales
+              pour lutter contre la déforestation.
+            </p>
+            <div class="project-meta">
+              <span class="project-location">Madagascar</span>
+              <span class="project-status">En cours</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="projects-cta">
+        <a routerLink="/activities" class="btn btn-primary">Voir tous nos projets</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Témoignages</span>
+        <h2 class="section-title">Ils Nous Font Confiance</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+          <div class="testimonial-content">
+            <p class="testimonial-text">"{{ testimonial.content }}"</p>
+          </div>
+          <div class="testimonial-author">
+            <img [src]="testimonial.image" [alt]="testimonial.name" class="author-image">
+            <div class="author-info">
+              <div class="author-name">{{ testimonial.name }}</div>
+              <div class="author-role">{{ testimonial.role }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Prêt à Faire la Différence ?</h2>
+        <p class="cta-text">
+          Rejoignez notre communauté de changeurs du monde et contribuez à créer un impact positif durable.
+        </p>
+        <div class="cta-actions">
+          <a href="#donate" class="btn btn-primary">Faire un Don</a>
+          <a routerLink="/contact" class="btn btn-outline-white">Devenir Bénévole</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

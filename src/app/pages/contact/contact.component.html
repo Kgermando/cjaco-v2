@@ -1,0 +1,170 @@
+<main class="contact">
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Contactez <span class="gradient-text">CJACO</span></h1>
+      <p class="hero-subtitle">
+        Notre équipe est disponible pour répondre à vos questions, discuter de partenariats
+        ou vous accompagner dans vos projets de développement durable.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-content">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Nos Coordonnées</h2>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-text">
+              <h3>Siège Social</h3>
+              <p>608 Av. Yolo Q. Musoso <br>C. Limete, Kinshasa, RDC</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="info-text">
+              <h3>Téléphone</h3>
+              <p>+243 85 803 00 79<br>
+                Urgences : +243 99 578 00 46</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="info-text">
+              <h3>Contacts Email</h3>
+              <p>
+                <!-- contact&#64;cjaco.org<br> -->
+                cibangu&#64;cjaco.org<br>
+                jeunesambassadeurs.cjaco&#64;gmail.com
+              </p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div class="info-text">
+              <h3>Horaires</h3>
+              <p>Lun-Ven : 8h30-16h30<br>
+                Support d'urgence 24h/7j</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <h2>Envoyez-nous un Message</h2>
+          <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
+            <div class="form-group">
+              <label for="name">Nom complet *</label>
+              <input type="text" id="name" name="name" [(ngModel)]="contactForm.name" required class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" [(ngModel)]="contactForm.email" required class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Sujet *</label>
+              <input type="text" id="subject" name="subject" [(ngModel)]="contactForm.subject" required
+                class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" [(ngModel)]="contactForm.message" required rows="6"
+                class="form-control"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!contactFormRef.valid">
+              Envoyer le Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regional Offices Section -->
+  <section class="regional-offices">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nos Bureaux</span>
+        <h2 class="section-title">Bureaux Régionaux</h2>
+      </div>
+
+      <div class="offices-grid">
+        <div class="office-card">
+          <h3>Afrique de l'Ouest</h3>
+          <div class="office-info">
+            <p><strong>Bamako, Mali</strong><br>
+              Bureau régional Sahel<br>
+              +223 20 22 45 67<br>
+              bamako&#64;cjaco.org</p>
+          </div>
+        </div>
+
+        <div class="office-card">
+          <h3>Amérique du Sud</h3>
+          <div class="office-info">
+            <p><strong>São Paulo, Brésil</strong><br>
+              Bureau régional Amazonie<br>
+              +55 11 3456 7890<br>
+              saopaulo&#64;cjaco.org</p>
+          </div>
+        </div>
+
+        <div class="office-card">
+          <h3>Afrique Centrale</h3>
+          <div class="office-info">
+            <p><strong>Ouagadougou, Burkina Faso</strong><br>
+              Coordination régionale<br>
+              +226 25 36 47 58<br>
+              ouaga&#64;cjaco.org</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Support</span>
+        <h2 class="section-title">Questions Fréquentes</h2>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>Comment devenir partenaire de CJACO ?</h3>
+          <p>Contactez notre service partenariats à partenariats&#64;cjaco.org. Nous étudions toute proposition de
+            collaboration alignée avec notre mission.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Quels sont vos délais de réponse ?</h3>
+          <p>Nous nous engageons à répondre sous 48h ouvrées pour toute demande standard, 24h pour les urgences
+            humanitaires.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Comment suivre l'avancement d'un projet ?</h3>
+          <p>Nos partenaires ont accès à une plateforme de suivi en ligne avec rapports trimestriels et indicateurs en
+            temps réel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

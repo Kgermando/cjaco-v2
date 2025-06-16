@@ -1,0 +1,117 @@
+<main class="organisation">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">      <h1 class="hero-title">Notre <span class="gradient-text">Organisation</span></h1>
+      <p class="hero-subtitle">
+        Une structure professionnelle et transparente, certifiée ISO 9001, qui garantit l'efficacité 
+        et l'impact de nos programmes de développement durable.
+      </p>
+    </div>
+  </section>
+
+  <!-- Structure Section -->
+  <section class="structure">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Structure</span>
+        <h2 class="section-title">Gouvernance et Organisation</h2>
+      </div>
+      
+      <div class="structure-grid">
+        <div class="structure-card">
+          <div class="structure-icon">
+            <i class="fas fa-users-cog"></i>
+          </div>          <h3>Conseil d'Administration</h3>
+          <p>Composé de 11 membres indépendants issus du monde académique, économique et associatif. Supervision stratégique et contrôle éthique.</p>
+        </div>
+        
+        <div class="structure-card">
+          <div class="structure-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>          <h3>Direction Générale</h3>
+          <p>Responsable de l'exécution de la stratégie décennale 2025-2035 et de la gestion opérationnelle. Reporting mensuel au Conseil.</p>
+        </div>
+        
+        <div class="structure-card">
+          <div class="structure-icon">
+            <i class="fas fa-project-diagram"></i>
+          </div>          <h3>Départements Spécialisés</h3>
+          <p>6 départements : Programmes, Finances, Ressources Humaines, Communication, Innovation Tech et Monitoring & Évaluation.</p>
+        </div>
+        
+        <div class="structure-card">
+          <div class="structure-icon">
+            <i class="fas fa-globe-africa"></i>
+          </div>          <h3>Bureaux Régionaux</h3>
+          <p>12 bureaux dans 8 pays (Mali, Burkina Faso, Sénégal, Côte d'Ivoire, Brésil, Pérou, Colombie, Équateur) avec 95 employés locaux.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Équipe</span>
+        <h2 class="section-title">Notre Équipe Dirigeante</h2>
+      </div>
+      
+      <div class="team-grid">
+        <div class="team-member" *ngFor="let member of teamMembers">
+          <div class="member-image">
+            <img [src]="member.image" [alt]="member.name">
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">{{ member.name }}</h3>
+            <p class="member-role">{{ member.role }}</p>
+            <p class="member-bio">{{ member.bio }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Transparence</span>
+        <h2 class="section-title">Nos Engagements</h2>
+      </div>
+      
+      <div class="values-grid">
+        <div class="value-item">
+          <div class="value-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>          <h3>Transparence Financière</h3>
+          <p>Publication trimestrielle des comptes, audit externe annuel par Deloitte. 87% des fonds directement alloués aux programmes.</p>
+        </div>
+        
+        <div class="value-item">
+          <div class="value-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h3>Certifications & Labels</h3>
+          <p>ISO 9001:2015, Don en Confiance, Statut consultatif spécial ONU, membre du Comité de la Charte.</p>
+        </div>
+        
+        <div class="value-item">
+          <div class="value-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3>Code d'Éthique</h3>
+          <p>Charte anti-corruption, politique de protection de l'enfance, formation obligatoire pour 100% du personnel.</p>
+        </div>
+        
+        <div class="value-item">
+          <div class="value-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <h3>Responsabilité Environnementale</h3>
+          <p>Bilan carbone annuel, compensation à 120%. Objectif neutralité carbone 2028.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

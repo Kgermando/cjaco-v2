@@ -1,0 +1,210 @@
+<main class="about">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background">
+      <img src="/assets/images/about.png" style="height: 150px;" alt="CJACO Team" class="hero-image">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="container">
+        <!-- <div class="hero-logo">
+          <img src="/assets/images/logo.png" alt="CJACO Logo" class="logo-image">
+        </div> -->
+        <h1 class="hero-title">À Propos de <span class="gradient-text">CJACO</span></h1>
+        <p class="hero-subtitle">
+          Depuis 2008, nous construisons des ponts entre les communautés pour créer un développement durable,
+          équitable et respectueux de l'environnement à travers l'Afrique et l'Amérique latine.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="story">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-content">
+          <div class="section-header">
+            <span class="section-tag">Notre Histoire</span>
+            <h2 class="section-title">Une Vision Partagée</h2>
+          </div>
+          <div class="story-text">
+            <p>
+              CJACO (Coopération pour la Justice, l'Action et la Cohésion) est née d'une conviction profonde :
+              le développement durable ne peut se réaliser qu'à travers une approche collaborative qui place
+              les communautés locales au cœur de toute transformation sociale, économique et environnementale.
+            </p>
+            <p>
+              Fondée en 2008 par un collectif de professionnels du développement international, de chercheurs
+              et d'acteurs de terrain, notre organisation a débuté ses activités au Mali avec un projet pilote
+              d'éducation dans la région de Kayes. Cette première expérience nous a enseigné l'importance de
+              l'écoute, de la patience et du respect des savoirs locaux.
+            </p>
+            <p>
+              Aujourd'hui présente dans 28 pays d'Afrique et d'Amérique latine, CJACO a accompagné plus de
+              125,000 bénéficiaires directs à travers 380 projets. Notre approche participative et notre
+              engagement envers l'innovation sociale nous permettent de développer des solutions durables
+              qui répondent aux besoins réels des communautés tout en respectant leur dignité et leur autonomie.
+            </p>
+          </div>
+          <div class="story-stats">
+            <div class="stat">
+              <div class="stat-number">16+</div>
+              <div class="stat-label">Années d'expérience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">28</div>
+              <div class="stat-label">Pays d'intervention</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">125K+</div>
+              <div class="stat-label">Bénéficiaires directs</div>
+            </div>
+          </div>
+        </div>
+        <div class="story-visual">
+          <img src="/assets/images/story-image.jpg" alt="CJACO en action" class="story-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-vision">
+    <div class="container">
+      <div class="mission-vision-grid">
+        <div class="mission-card">
+          <div class="card-icon">
+            <i class="fas fa-bullseye"></i>
+          </div>
+          <h3>Notre Mission</h3>
+          <p>
+            Accompagner les communautés locales d'Afrique et d'Amérique latine dans leur développement
+            durable à travers des programmes innovants d'éducation, de santé, d'environnement et
+            d'agriculture, en privilégiant l'approche participative, le renforcement des capacités
+            locales et le respect des cultures.
+          </p>
+        </div>
+
+        <div class="vision-card">
+          <div class="card-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <h3>Notre Vision</h3>
+          <p>
+            Un monde où chaque communauté, indépendamment de sa situation géographique ou économique,
+            dispose des outils, des connaissances et des opportunités nécessaires pour construire
+            son propre développement dans le respect de l'environnement, de la justice sociale
+            et de la dignité humaine.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nos Valeurs</span>
+        <h2 class="section-title">Les Principes qui Nous Guident</h2>
+        <p class="section-subtitle">
+          Nos valeurs fondamentales orientent chacune de nos actions et décisions,
+          garantissant un impact positif et durable.
+        </p>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card" *ngFor="let value of values">
+          <div class="value-icon">
+            <i [class]="value.icon"></i>
+          </div>
+          <h3 class="value-title">{{ value.title }}</h3>
+          <p class="value-description">{{ value.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Notre Parcours</span>
+        <h2 class="section-title">Étapes Marquantes</h2>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-item" *ngFor="let item of timeline; let i = index" [class.reverse]="i % 2 === 1">
+          <div class="timeline-content">
+            <div class="timeline-year">{{ item.year }}</div>
+            <h3 class="timeline-title">{{ item.title }}</h3>
+            <p class="timeline-description">{{ item.description }}</p>
+          </div>
+          <div class="timeline-marker">
+            <div class="timeline-dot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section class="impact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Notre Impact</span>
+        <h2 class="section-title">Résultats Concrets</h2>
+      </div>
+
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-visual">
+            <div class="progress-circle" data-percentage="85">
+              <span class="percentage">85%</span>
+            </div>
+          </div>
+          <h3>Taux de Réussite Scolaire</h3>
+          <p>Augmentation significative du taux de réussite dans nos écoles partenaires</p>
+        </div>
+
+        <div class="impact-card">
+          <div class="impact-visual">
+            <div class="progress-circle" data-percentage="92">
+              <span class="percentage">92%</span>
+            </div>
+          </div>
+          <h3>Satisfaction Bénéficiaires</h3>
+          <p>Taux de satisfaction élevé parmi les communautés bénéficiaires</p>
+        </div>
+
+        <div class="impact-card">
+          <div class="impact-visual">
+            <div class="progress-circle" data-percentage="78">
+              <span class="percentage">78%</span>
+            </div>
+          </div>
+          <h3>Durabilité Projets</h3>
+          <p>Pourcentage de projets maintenus de façon autonome après notre retrait</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Rejoignez Notre Mission</h2>
+        <p class="cta-text">
+          Ensemble, nous pouvons créer un impact positif durable.
+          Découvrez comment vous pouvez contribuer à notre mission.
+        </p>
+        <div class="cta-actions">
+          <a routerLink="/contact" class="btn btn-primary">Nous Contacter</a>
+          <a routerLink="/activities" class="btn btn-outline-white">Voir Nos Projets</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,100 @@
+.activities {
+  .hero {
+    background: var(--gradient-hero);
+    color: white;
+    padding: 8rem 0 4rem;
+    text-align: center;
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+
+      .gradient-text {
+        background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-color) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      font-weight: 400;
+    }
+  }
+
+  .programs {
+    padding: 6rem 0;
+    background: white;
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+
+      .section-tag {
+        display: inline-block;
+        background: var(--gradient-secondary);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--text-primary);
+      }
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .program-card {
+      background: var(--background-white);
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-medium);
+      }
+
+      .program-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+      }
+
+      h3 {
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+      }
+
+      p {
+        color: var(--text-light);
+        line-height: 1.6;
+      }
+    }
+  }
+}
