@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SeoService } from '../../services/seo.service';
+import { EmailService, ContactFormData } from '../../services/email.service';
 
 @Component({
   selector: 'app-contact',
@@ -12,14 +13,21 @@ import { SeoService } from '../../services/seo.service';
 })
 export class ContactComponent implements OnInit {
 
-  contactForm = {
+  contactForm: ContactFormData = {
     name: '',
     email: '',
     subject: '',
     message: ''
   };
 
-  constructor(private seoService: SeoService) { }
+  isSubmitting = false;
+  submitMessage = '';
+  submitSuccess = false;
+
+  constructor(
+    private seoService: SeoService,
+    private emailService: EmailService
+  ) { }
 
   ngOnInit() {    this.seoService.updateSEO({
       title: 'Contactez CJACO - Partenariats et Coopération | ONG Développement',
@@ -29,9 +37,43 @@ export class ContactComponent implements OnInit {
       url: 'https://cjaco.org/contact'
     });
   }
-
   onSubmit() {
-    console.log('Form submitted:', this.contactForm);
-    // Ici, vous pouvez ajouter la logique d'envoi du formulaire
+    // Validation du formulaire
+    const validation = this.emailService.validateForm(this.contactForm);
+    
+    if (!validation.isValid) {
+      this.submitMessage = validation.errors.join('\n');
+      this.submitSuccess = false;
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.submitMessage = '';
+
+    // Envoi de l'email
+    this.emailService.sendEmail(this.contactForm).subscribe({
+      next: (response) => {
+        console.log('Email envoyé avec succès:', response);
+        this.submitMessage = 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.';
+        this.submitSuccess = true;
+        this.resetForm();
+        this.isSubmitting = false;
+      },
+      error: (error) => {
+        console.error('Erreur lors de l\'envoi de l\'email:', error);
+        this.submitMessage = 'Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer ou nous contacter directement par email.';
+        this.submitSuccess = false;
+        this.isSubmitting = false;
+      }
+    });
+  }
+
+  private resetForm() {
+    this.contactForm = {
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    };
   }
 }

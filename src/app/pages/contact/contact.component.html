@@ -43,7 +43,7 @@
             <div class="info-text">
               <h3>Contacts Email</h3>
               <p>
-                <!-- contact&#64;cjaco.org<br> -->
+                contact&#64;cjaco.org<br>
                 cibangu&#64;cjaco.org<br>
                 jeunesambassadeurs.cjaco&#64;gmail.com
               </p>
@@ -60,35 +60,48 @@
                 Support d'urgence 24h/7j</p>
             </div>
           </div>
-        </div>
-
-        <div class="contact-form">
+        </div>        <div class="contact-form">
           <h2>Envoyez-nous un Message</h2>
+          
+          <!-- Message de statut -->
+          <div *ngIf="submitMessage" class="alert" 
+               [ngClass]="{'alert-success': submitSuccess, 'alert-error': !submitSuccess}">
+            <p>{{ submitMessage }}</p>
+          </div>
+
           <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
             <div class="form-group">
               <label for="name">Nom complet *</label>
-              <input type="text" id="name" name="name" [(ngModel)]="contactForm.name" required class="form-control">
+              <input type="text" id="name" name="name" [(ngModel)]="contactForm.name" required 
+                     class="form-control" [disabled]="isSubmitting">
             </div>
 
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" name="email" [(ngModel)]="contactForm.email" required class="form-control">
+              <input type="email" id="email" name="email" [(ngModel)]="contactForm.email" required 
+                     class="form-control" [disabled]="isSubmitting">
             </div>
 
             <div class="form-group">
               <label for="subject">Sujet *</label>
               <input type="text" id="subject" name="subject" [(ngModel)]="contactForm.subject" required
-                class="form-control">
+                     class="form-control" [disabled]="isSubmitting">
             </div>
 
             <div class="form-group">
               <label for="message">Message *</label>
               <textarea id="message" name="message" [(ngModel)]="contactForm.message" required rows="6"
-                class="form-control"></textarea>
+                        class="form-control" [disabled]="isSubmitting"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="!contactFormRef.valid">
-              Envoyer le Message
+            <button type="submit" class="btn btn-primary" 
+                    [disabled]="!contactFormRef.valid || isSubmitting">
+              <span *ngIf="isSubmitting">
+                <i class="fas fa-spinner fa-spin"></i> Envoi en cours...
+              </span>
+              <span *ngIf="!isSubmitting">
+                Envoyer le Message
+              </span>
             </button>
           </form>
         </div>
