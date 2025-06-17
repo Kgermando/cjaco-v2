@@ -1,4 +1,6 @@
-.home { overflow-x: hidden; }
+.home {
+  overflow-x: hidden;
+}
 
 .hero {
   position: relative;
@@ -30,20 +32,24 @@
 
   .hero-content {
     z-index: 1;
-    
+
     .hero-logo {
       margin-bottom: 2rem;
-      
+
       .logo-image {
         width: 120px;
         height: auto;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         transition: transform 0.3s ease;
-        
-        &:hover { transform: scale(1.05); }
-        
-        @media (max-width: 768px) { width: 80px; }
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+          width: 80px;
+        }
       }
     }
 
@@ -64,18 +70,15 @@
       max-width: 800px;
       margin: 0 auto 2.5rem;
       line-height: 1.6;
-      opacity: 0.9;
+      color: #ffffff;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       
       @media (max-width: 768px) {
-        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-        opacity: 1;
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-        font-weight: 500;
-        background: rgba(0, 0, 0, 0.1);
-        padding: 1rem;
-        border-radius: 10px;
-        backdrop-filter: blur(5px);
+        font-size: clamp(1.2rem, 2.8vw, 1.4rem);
+        text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: 0.3px;
       }
     }
 
@@ -84,7 +87,7 @@
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
-      
+
       .btn {
         padding: 0.75rem 1.5rem;
         font-size: 0.9rem;
@@ -137,7 +140,7 @@
 .section-header {
   text-align: center;
   margin-bottom: 4rem;
-  
+
   .section-tag {
     display: inline-block;
     background: var(--gradient-secondary);
@@ -148,14 +151,14 @@
     font-weight: 600;
     margin-bottom: 1rem;
   }
-  
+
   .section-title {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 1rem;
   }
-  
+
   .section-subtitle {
     font-size: 1.1rem;
     color: var(--text-light);
@@ -177,7 +180,7 @@
   cursor: pointer;
   text-align: center;
   min-width: 160px;
-  
+
   &.btn-primary {
     background: var(--gradient-primary);
     color: white;
@@ -233,7 +236,9 @@
     box-shadow: var(--shadow-light);
     transition: transform 0.3s ease;
 
-    &:hover { transform: translateY(-5px); }
+    &:hover {
+      transform: translateY(-5px);
+    }
 
     .stat-number {
       font-size: 3rem;
@@ -365,8 +370,13 @@
       }
 
       &:hover {
-        img { transform: scale(1.1); }
-        .project-overlay { opacity: 1; }
+        img {
+          transform: scale(1.1);
+        }
+
+        .project-overlay {
+          opacity: 1;
+        }
       }
     }
 
@@ -403,7 +413,9 @@
         align-items: center;
         font-size: 0.9rem;
 
-        .project-location { color: var(--text-light); }
+        .project-location {
+          color: var(--text-light);
+        }
 
         .project-status {
           background: var(--primary-color);
@@ -416,7 +428,9 @@
     }
   }
 
-  .projects-cta { text-align: center; }
+  .projects-cta {
+    text-align: center;
+  }
 }
 
 .testimonials {
@@ -528,14 +542,28 @@
 }
 
 @media (max-width: 768px) {
-  .hero-actions, .cta-actions {
+
+  .hero-actions,
+  .cta-actions {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-  .stats-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  .mission-grid, .projects-grid, .testimonials-grid { grid-template-columns: 1fr; }
-  .project-card .project-content { padding: 1.5rem; }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .mission-grid,
+  .projects-grid,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card .project-content {
+    padding: 1.5rem;
+  }
+
   .btn {
     width: 100%;
     max-width: 280px;
@@ -543,18 +571,29 @@
 }
 
 @media (max-width: 480px) {
-  .container { padding: 0 1rem; }
+  .container {
+    padding: 0 1rem;
+  }
+
   .btn {
     padding: 0.875rem 1.5rem;
     font-size: 0.95rem;
     width: 100%;
     max-width: 260px;
   }
-  .section-header { margin-bottom: 2rem; }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
   .cta {
     padding: 4rem 0;
+
     .cta-content {
-      .cta-title { font-size: 1.75rem; }
+      .cta-title {
+        font-size: 1.75rem;
+      }
+
       .cta-text {
         font-size: 1.1rem;
         margin-bottom: 2rem;
