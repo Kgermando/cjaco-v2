@@ -46,7 +46,7 @@
           <li><a href="#">Santé</a></li>
           <li><a href="#">Environnement</a></li>
           <li><a href="#">Développement</a></li>
-          <li><a href="#">Urgence</a></li>
+          <li><a href="#">Technologie</a></li>
         </ul>
       </div>
 
@@ -55,23 +55,46 @@
         <div class="contact-info">
           <div class="contact-item">
             <i class="fas fa-map-marker-alt"></i>
-            <span>123 Rue de la Paix, Ville, Pays</span>
+            <span>608 Av. Yolo Q. Musoso C. Limete, Kinshasa, RDC</span>
           </div>
           <div class="contact-item">
             <i class="fas fa-phone"></i>
-            <span>+33 1 23 45 67 89</span>
+            <span>+243 85 803 00 79</span>
           </div>
           <div class="contact-item">
             <i class="fas fa-envelope"></i>
             <span>contact&#64;cjaco.org</span>
           </div>
-        </div>
-        <div class="newsletter">
+        </div>        <div class="newsletter">
           <h4>Newsletter</h4>
-          <div class="newsletter-form">
-            <input type="email" placeholder="Votre email" class="newsletter-input">
-            <button class="newsletter-btn">S'abonner</button>
+          <p class="newsletter-description">Restez informé de nos dernières actualités et actions.</p>
+          
+          <!-- Message de statut -->
+          <div *ngIf="submitMessage" class="newsletter-alert" 
+               [ngClass]="{'alert-success': submitSuccess, 'alert-error': !submitSuccess}">
+            <p>{{ submitMessage }}</p>
           </div>
+
+          <form (ngSubmit)="onNewsletterSubmit()" #newsletterFormRef="ngForm" class="newsletter-form">
+            <input 
+              type="email" 
+              name="email"
+              [(ngModel)]="newsletterForm.email"
+              placeholder="Votre email" 
+              class="newsletter-input"
+              [disabled]="isSubmitting"
+              required
+              #emailInput="ngModel">
+            <button 
+              type="submit" 
+              class="newsletter-btn"
+              [disabled]="!newsletterFormRef.valid || isSubmitting">
+              <span *ngIf="isSubmitting">
+                <i class="fas fa-spinner fa-spin"></i>
+              </span>
+              <span *ngIf="!isSubmitting">S'abonner</span>
+            </button>
+          </form>
         </div>
       </div>
     </div>

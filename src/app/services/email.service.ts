@@ -9,6 +9,11 @@ export interface ContactFormData {
   message: string;
 }
 
+// Interface pour les données de newsletter
+export interface NewsletterData {
+  email: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -110,5 +115,40 @@ export class EmailService {
   private isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  /**
+   * Envoie un email d'abonnement à la newsletter
+   */
+  subscribeToNewsletter(newsletterData: NewsletterData): Observable<any> {
+    return from(this.subscribeNewsletterInternal(newsletterData));
+  }
+
+  private async subscribeNewsletterInternal(newsletterData: NewsletterData): Promise<any> {
+    try {
+      // Import dynamique d'EmailJS
+      const emailjs = await import('emailjs-com');
+      
+      // Préparation des données du template pour la newsletter
+      const templateParams = {
+        subscriber_email: newsletterData.email,
+        to_email: 'contact@cjaco.org',
+        subject: 'Nouvel abonnement newsletter',
+        message: `Nouvel abonnement à la newsletter de CJACO.\n\nEmail: ${newsletterData.email}\n\nDate: ${new Date().toLocaleDateString('fr-FR')}`
+      };
+
+      // Configuration pour le template de newsletter (vous pouvez créer un template séparé)
+      const response = await emailjs.send(
+        this.emailJSConfig.serviceId,
+        'template_newsletter_cjaco', // Template spécifique pour la newsletter
+        templateParams,
+        this.emailJSConfig.publicKey
+      );
+
+      return response;
+    } catch (error) {
+      console.error('Erreur lors de l\'abonnement à la newsletter:', error);
+      throw error;
+    }
   }
 }

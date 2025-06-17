@@ -22,6 +22,8 @@ Le formulaire de contact de CJACO utilise EmailJS pour envoyer les messages dire
 
 ### 3. Créer un template d'email
 
+#### Template pour les messages de contact
+
 1. Allez dans "Email Templates"
 2. Cliquez sur "Create New Template"
 3. Configurez le template avec les variables suivantes :
@@ -40,7 +42,25 @@ Ce message a été envoyé via le formulaire de contact du site CJACO.
 Répondre à: {{reply_to}}
 ```
 
-4. Notez le **Template ID** généré
+4. Notez le **Template ID** généré (ex: `template_cjaco`)
+
+#### Template pour la newsletter
+
+1. Créez un second template pour les abonnements newsletter
+2. ID suggéré : `template_newsletter_cjaco`
+3. Configurez avec :
+
+```
+Subject: Nouvel abonnement newsletter CJACO
+
+Nouvel abonnement à la newsletter CJACO
+
+Email de l'abonné: {{subscriber_email}}
+Date d'abonnement: {{date}}
+
+---
+Abonnement effectué via le site web CJACO.
+```
 
 ### 4. Obtenir la clé publique
 
