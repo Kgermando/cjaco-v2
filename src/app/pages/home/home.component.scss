@@ -1,7 +1,5 @@
-// Base styles
 .home { overflow-x: hidden; }
 
-// Hero Section
 .hero {
   position: relative;
   height: 100vh;
@@ -121,7 +119,6 @@
   }
 }
 
-// Shared styles
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -209,7 +206,6 @@
   }
 }
 
-// Stats Section
 .stats {
   background: var(--background-light);
   padding: 5rem 0;
@@ -248,7 +244,6 @@
   }
 }
 
-// Mission Section
 .mission {
   padding: 6rem 0;
   background: white;
@@ -299,7 +294,6 @@
   }
 }
 
-// Projects Section
 .projects {
   padding: 6rem 0;
   background: var(--background-light);
@@ -416,7 +410,6 @@
   .projects-cta { text-align: center; }
 }
 
-// Testimonials Section
 .testimonials {
   padding: 6rem 0;
   background: white;
@@ -479,7 +472,6 @@
   }
 }
 
-// CTA Section
 .cta {
   padding: 6rem 0;
   background: var(--gradient-hero);
@@ -526,23 +518,15 @@
   }
 }
 
-// Responsive Design
 @media (max-width: 768px) {
-  .hero-actions,
-  .cta-actions {
+  .hero-actions, .cta-actions {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
   }
-
   .stats-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-
-  .mission-grid,
-  .projects-grid,
-  .testimonials-grid { grid-template-columns: 1fr; }
-
+  .mission-grid, .projects-grid, .testimonials-grid { grid-template-columns: 1fr; }
   .project-card .project-content { padding: 1.5rem; }
-
   .btn {
     width: 100%;
     max-width: 280px;
@@ -551,19 +535,15 @@
 
 @media (max-width: 480px) {
   .container { padding: 0 1rem; }
-
   .btn {
     padding: 0.875rem 1.5rem;
     font-size: 0.95rem;
     width: 100%;
     max-width: 260px;
   }
-
   .section-header { margin-bottom: 2rem; }
-
   .cta {
     padding: 4rem 0;
-    
     .cta-content {
       .cta-title { font-size: 1.75rem; }
       .cta-text {
