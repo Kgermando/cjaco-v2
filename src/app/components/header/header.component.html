@@ -11,38 +11,39 @@
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
-      </button>
+      </button>      
+      <div class="mobile-overlay" [class.active]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
       
       <div class="nav-menu" [class.active]="isMobileMenuOpen">
         <ul class="nav-list">
           <li class="nav-item">
-            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" (click)="closeMobileMenu()">
               Accueil
             </a>
           </li>
           <li class="nav-item">
-            <a routerLink="/about" routerLinkActive="active" class="nav-link">
+            <a routerLink="/about" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
               À Propos
             </a>
           </li>
           <li class="nav-item">
-            <a routerLink="/organisation" routerLinkActive="active" class="nav-link">
+            <a routerLink="/organisation" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
               Organisation
             </a>
           </li>
           <li class="nav-item">
-            <a routerLink="/activities" routerLinkActive="active" class="nav-link">
+            <a routerLink="/activities" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
               Activités
             </a>
           </li>
           <li class="nav-item">
-            <a routerLink="/contact" routerLinkActive="active" class="nav-link">
+            <a routerLink="/contact" routerLinkActive="active" class="nav-link" (click)="closeMobileMenu()">
               Contact
             </a>
           </li>
         </ul>
         <div class="nav-cta">
-          <a href="#donate" class="btn btn-primary">Faire un Don</a>
+          <a href="#donate" class="btn btn-primary" (click)="closeMobileMenu()">Faire un Don</a>
         </div>
       </div>
     </div>
