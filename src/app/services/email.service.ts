@@ -122,32 +122,50 @@ export class EmailService {
    */
   subscribeToNewsletter(newsletterData: NewsletterData): Observable<any> {
     return from(this.subscribeNewsletterInternal(newsletterData));
-  }
-
-  private async subscribeNewsletterInternal(newsletterData: NewsletterData): Promise<any> {
+  }  private async subscribeNewsletterInternal(newsletterData: NewsletterData): Promise<any> {
     try {
+      console.log('📧 Starting newsletter subscription for:', newsletterData.email);
+      console.log('🔧 EmailJS Config:', {
+        serviceId: this.emailJSConfig.serviceId,
+        templateId: this.emailJSConfig.templateId,
+        publicKeySet: !!this.emailJSConfig.publicKey
+      });
+
       // Import dynamique d'EmailJS
       const emailjs = await import('emailjs-com');
+      console.log('📦 EmailJS imported successfully');
       
       // Préparation des données du template pour la newsletter
+      // Utilise le même template que le contact avec des paramètres adaptés
       const templateParams = {
-        subscriber_email: newsletterData.email,
+        from_name: 'Newsletter Subscription',
+        from_email: newsletterData.email,
         to_email: 'contact@cjaco.org',
-        subject: 'Nouvel abonnement newsletter',
-        message: `Nouvel abonnement à la newsletter de CJACO.\n\nEmail: ${newsletterData.email}\n\nDate: ${new Date().toLocaleDateString('fr-FR')}`
+        subject: 'Nouvel abonnement newsletter CJACO',
+        message: `Nouvelle demande d'abonnement à la newsletter CJACO.\n\nEmail de l'abonné: ${newsletterData.email}\n\nDate d'abonnement: ${new Date().toLocaleDateString('fr-FR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        })}\n\nMerci d'ajouter cette adresse à votre liste de diffusion newsletter.`,
+        reply_to: newsletterData.email
       };
 
-      // Configuration pour le template de newsletter (vous pouvez créer un template séparé)
+      console.log('📝 Template params prepared:', templateParams);
+
+      // Utilise le même template que pour les messages de contact
       const response = await emailjs.send(
         this.emailJSConfig.serviceId,
-        'template_newsletter_cjaco', // Template spécifique pour la newsletter
+        this.emailJSConfig.templateId, // Utilise le même template que pour le contact
         templateParams,
         this.emailJSConfig.publicKey
       );
 
+      console.log('✅ EmailJS response:', response);
       return response;
     } catch (error) {
-      console.error('Erreur lors de l\'abonnement à la newsletter:', error);
+      console.error('❌ Erreur lors de l\'abonnement à la newsletter:', error);
       throw error;
     }
   }

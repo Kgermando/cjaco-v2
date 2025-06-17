@@ -22,23 +22,26 @@ export class FooterComponent {
   submitSuccess = false;
 
   constructor(private emailService: EmailService) {}
-
   onNewsletterSubmit() {
+    console.log('🚀 Newsletter submit started with email:', this.newsletterForm.email);
+    
     // Validation basique de l'email
     if (!this.newsletterForm.email || !this.isValidEmail(this.newsletterForm.email)) {
+      console.log('❌ Email validation failed');
       this.submitMessage = 'Veuillez entrer une adresse email valide';
       this.submitSuccess = false;
       this.clearMessageAfterDelay();
       return;
     }
 
+    console.log('✅ Email validation passed');
     this.isSubmitting = true;
     this.submitMessage = '';
 
     // Envoi de l'abonnement newsletter
     this.emailService.subscribeToNewsletter(this.newsletterForm).subscribe({
       next: (response) => {
-        console.log('Abonnement newsletter réussi:', response);
+        console.log('✅ Abonnement newsletter réussi:', response);
         this.submitMessage = 'Merci ! Vous êtes maintenant abonné(e) à notre newsletter.';
         this.submitSuccess = true;
         this.newsletterForm.email = '';
@@ -46,7 +49,7 @@ export class FooterComponent {
         this.clearMessageAfterDelay();
       },
       error: (error) => {
-        console.error('Erreur lors de l\'abonnement newsletter:', error);
+        console.error('❌ Erreur lors de l\'abonnement newsletter:', error);
         this.submitMessage = 'Une erreur est survenue. Veuillez réessayer.';
         this.submitSuccess = false;
         this.isSubmitting = false;
