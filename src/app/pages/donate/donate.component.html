@@ -1,0 +1,349 @@
+<main class="donate">
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Faire un <span class="gradient-text">Don</span></h1>
+            <p class="hero-subtitle">
+                Votre générosité nous aide à continuer notre mission de développement durable
+                et d'autonomisation des communautés. Chaque contribution compte.
+            </p>
+        </div>
+    </section>
+
+    <section class="donate-content">
+        <div class="container">
+            <div class="donate-grid">
+                <!-- Formulaire de don -->
+                <div class="donate-form-container">
+                    <div class="form-header">
+                        <h2>Faire votre don</h2>
+                        <p>Choisissez le montant et la méthode de paiement qui vous convient</p>
+                    </div>
+
+                    <form class="donate-form" (ngSubmit)="onSubmit()" #donateForm="ngForm">
+                        <!-- Montants prédéfinis -->
+                        <div class="amount-section">
+                            <h3>Montant du don</h3>
+                            <div class="amount-buttons">
+                                <button type="button" class="amount-btn" [class.active]="selectedAmount === amount"
+                                    *ngFor="let amount of predefinedAmounts" (click)="selectAmount(amount)">
+                                    {{amount}} USD
+                                </button>
+                            </div>
+                            <div class="custom-amount">
+                                <label for="customAmount">Montant personnalisé (USD)</label>
+                                <input type="number" id="customAmount" name="customAmount" [(ngModel)]="customAmount"
+                                    (input)="onCustomAmountChange()" placeholder="Entrez votre montant" min="1">
+                            </div>
+                            <div class="total-amount">
+                                <strong>Total : {{getTotalAmount()}} USD</strong>
+                            </div>
+                        </div>
+
+                        <!-- Informations du donateur -->
+                        <div class="donor-info">
+                            <h3>Vos informations</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">Prénom *</label>
+                                    <input type="text" id="firstName" name="firstName" [(ngModel)]="donorInfo.firstName"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Nom *</label>
+                                    <input type="text" id="lastName" name="lastName" [(ngModel)]="donorInfo.lastName"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" [(ngModel)]="donorInfo.email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Téléphone</label>
+                                    <input type="tel" id="phone" name="phone" [(ngModel)]="donorInfo.phone"
+                                        placeholder="+243 XXX XXX XXX">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message (optionnel)</label>
+                                <textarea id="message" name="message" [(ngModel)]="donorInfo.message" rows="3"
+                                    placeholder="Laissez-nous un message..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Méthodes de paiement -->
+                        <div class="payment-methods">
+                            <h3>Méthode de paiement</h3>
+                            <div class="payment-options">
+
+                                <!-- Virement bancaire -->
+                                <div class="payment-option">
+                                    <input type="radio" id="bank-transfer" name="paymentMethod" value="bank-transfer"
+                                        [(ngModel)]="selectedPaymentMethod" (change)="onPaymentMethodChange()">
+                                    <label for="bank-transfer" class="payment-label">
+                                        <div class="payment-icon">
+                                            <i class="fas fa-university"></i>
+                                        </div>
+                                        <div class="payment-info">
+                                            <h4>Virement Bancaire</h4>
+                                            <p>Transfert direct vers notre compte bancaire</p>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Mobile Money -->
+                                <div class="payment-option">
+                                    <input type="radio" id="mobile-money" name="paymentMethod" value="mobile-money"
+                                        [(ngModel)]="selectedPaymentMethod" (change)="onPaymentMethodChange()">
+                                    <label for="mobile-money" class="payment-label">
+                                        <div class="payment-icon">
+                                            <i class="fas fa-mobile-alt"></i>
+                                        </div>
+                                        <div class="payment-info">
+                                            <h4>Mobile Money</h4>
+                                            <p>Orange Money, Vodacom M-Pesa, Airtel Money</p>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- PayPal -->
+                                <div class="payment-option">
+                                    <input type="radio" id="paypal" name="paymentMethod" value="paypal"
+                                        [(ngModel)]="selectedPaymentMethod" (change)="onPaymentMethodChange()">
+                                    <label for="paypal" class="payment-label">
+                                        <div class="payment-icon">
+                                            <i class="fab fa-paypal"></i>
+                                        </div>
+                                        <div class="payment-info">
+                                            <h4>PayPal</h4>
+                                            <p>Paiement sécurisé via PayPal</p>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <!-- Carte de crédit -->
+                                <div class="payment-option">
+                                    <input type="radio" id="credit-card" name="paymentMethod" value="credit-card"
+                                        [(ngModel)]="selectedPaymentMethod" (change)="onPaymentMethodChange()">
+                                    <label for="credit-card" class="payment-label">
+                                        <div class="payment-icon">
+                                            <i class="fas fa-credit-card"></i>
+                                        </div>
+                                        <div class="payment-info">
+                                            <h4>Carte de Crédit</h4>
+                                            <p>Visa, MasterCard, American Express</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Détails de paiement dynamiques -->
+                        <div class="payment-details" *ngIf="selectedPaymentMethod">
+
+                            <!-- Détails virement bancaire -->
+                            <div *ngIf="selectedPaymentMethod === 'bank-transfer'" class="bank-details">
+                                <h4>Informations bancaires</h4>
+                                <div class="bank-info">
+                                    <div class="bank-item">
+                                        <strong>Nom de la banque :</strong> Banque Centrale du Congo
+                                    </div>
+                                    <div class="bank-item">
+                                        <strong>Nom du compte :</strong> CJACO ASBL
+                                    </div>
+                                    <div class="bank-item">
+                                        <strong>Numéro de compte :</strong> 001-2345678-90
+                                    </div>
+                                    <div class="bank-item">
+                                        <strong>Code SWIFT :</strong> BCDCCDKI
+                                    </div>
+                                    <div class="bank-item">
+                                        <strong>Référence :</strong> DON-CJACO-{{getCurrentDate()}}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Détails Mobile Money -->
+                            <div *ngIf="selectedPaymentMethod === 'mobile-money'" class="mobile-money-details">
+                                <h4>Choisissez votre opérateur</h4>
+                                <div class="mobile-operators">
+                                    <div class="operator-option">
+                                        <input type="radio" id="orange-money" name="mobileOperator" value="orange-money"
+                                            [(ngModel)]="selectedMobileOperator">
+                                        <label for="orange-money" class="operator-label">
+                                            <div class="operator-logo orange">
+                                                <i class="fas fa-mobile-alt"></i>
+                                            </div>
+                                            <div class="operator-info">
+                                                <h5>Orange Money</h5>
+                                                <p>+243 89 002 68 78</p>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <div class="operator-option">
+                                        <input type="radio" id="vodacom-mpesa" name="mobileOperator"
+                                            value="vodacom-mpesa" [(ngModel)]="selectedMobileOperator">
+                                        <label for="vodacom-mpesa" class="operator-label">
+                                            <div class="operator-logo vodacom">
+                                                <i class="fas fa-mobile-alt"></i>
+                                            </div>
+                                            <div class="operator-info">
+                                                <h5>Vodacom M-Pesa</h5>
+                                                <p>+243 82 475 71 55</p>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <div class="operator-option">
+                                        <input type="radio" id="airtel-money" name="mobileOperator" value="airtel-money"
+                                            [(ngModel)]="selectedMobileOperator">
+                                        <label for="airtel-money" class="operator-label">
+                                            <div class="operator-logo airtel">
+                                                <i class="fas fa-mobile-alt"></i>
+                                            </div>
+                                            <div class="operator-info">
+                                                <h5>Airtel Money</h5> 
+                                                <p>+243 99 578 00 46</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="selectedMobileOperator" class="mobile-instructions">
+                                    <h5>Instructions de paiement</h5>
+                                    <div class="instruction-steps">                                        <div class="step">
+                                            <span class="step-number">1</span>
+                                            <p>Composez le code <strong>{{getOperatorCode()}}</strong> correspondant à votre opérateur</p>
+                                        </div>
+                                        <div class="step">
+                                            <span class="step-number">2</span>
+                                            <p>Suivez les instructions et entrez le montant :
+                                                <strong>{{getTotalAmount()}} USD</strong></p>
+                                        </div>                                        <div class="step">
+                                            <span class="step-number">3</span>
+                                            <p>Confirmez la transaction et conservez le reçu</p>
+                                        </div>
+                                        <div class="step">
+                                            <span class="step-number">4</span>
+                                            <p>Saisissez le code de référence de la transaction :</p>
+                                            <div class="reference-code-input">
+                                                <input 
+                                                    type="text" 
+                                                    name="referenceCode"
+                                                    [(ngModel)]="referenceCode"
+                                                    placeholder="Ex: REF123456789"
+                                                    class="form-control"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Message pour PayPal et Carte de crédit -->
+                            <div *ngIf="selectedPaymentMethod === 'paypal' || selectedPaymentMethod === 'credit-card'"
+                                class="payment-redirect-info">
+                                <div class="info-box">
+                                    <i class="fas fa-info-circle"></i>
+                                    <p>Vous serez redirigé vers la plateforme de paiement sécurisé pour finaliser votre
+                                        transaction.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bouton de soumission -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-large"
+                                [disabled]="!donateForm.valid || !selectedPaymentMethod || getTotalAmount() <= 0">
+                                <i class="fas fa-heart"></i>
+                                Faire un don de {{getTotalAmount()}} USD
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Informations complémentaires -->
+                <div class="donate-info">
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3>Pourquoi donner ?</h3>
+                        </div>
+                        <div class="info-content">
+                            <ul class="benefits-list">
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Soutenir nos programmes de développement durable</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Contribuer à l'autonomisation des jeunes</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Financer nos actions humanitaires</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Participer au changement social positif</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3>Sécurité et transparence</h3>
+                        </div>
+                        <div class="info-content">
+                            <div class="security-features">
+                                <div class="feature">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div>
+                                        <h4>Paiements sécurisés</h4>
+                                        <p>Toutes les transactions sont cryptées et sécurisées</p>
+                                    </div>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-file-invoice"></i>
+                                    <div>
+                                        <h4>Reçu fiscal</h4>
+                                        <p>Recevez automatiquement votre reçu par email</p>
+                                    </div>
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-chart-line"></i>
+                                    <div>
+                                        <h4>Suivi des projets</h4>
+                                        <p>Suivez l'impact de votre contribution</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3>Besoin d'aide ?</h3>
+                        </div>
+                        <div class="info-content">
+                            <p>Notre équipe est disponible pour vous accompagner :</p>
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>+243 85 803 00 79</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>contact&#64;cjaco.org</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

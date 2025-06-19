@@ -4,6 +4,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { OrganisationComponent } from './pages/organisation/organisation.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { DonateComponent } from './pages/donate/donate.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,11 @@ export const routes: Routes = [
     path: 'contact',
     component: ContactComponent,
     title: 'Contact - CJACO | Nous Contacter'
+  },
+  {
+    path: 'donate',
+    component: DonateComponent,
+    title: 'Faire un Don - CJACO | Soutenez notre Mission'
   },
   {
     path: '**',

@@ -13,8 +13,8 @@ export class HomeComponent implements OnInit {
   stats = [
     { number: '1759+', label: 'Bénéficiaires directs' },
     { number: '300+', label: 'Activités réalisées' },
-    { number: '17+', label: 'Collarateurs actifs' },
-    { number: '3+', label: 'Présent dans provinces' },
+    { number: '17+', label: 'Collaborateurs actifs' },
+    { number: '3+', label: 'Représentations provinciales' },
   ];
   testimonials = [
     {

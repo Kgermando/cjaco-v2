@@ -12,40 +12,40 @@ import { SeoService } from '../../services/seo.service';
 export class OrganisationComponent implements OnInit {
   teamMembers = [
     {
-      name: 'Dr. Mariam Konaté',
-      role: 'Directrice Générale',
-      image: '/assets/team/mariam-konate.jpg',
-      bio: 'Docteure en développement international (Sorbonne), 22 ans d\'expérience en coopération internationale. Ancienne consultante Banque Mondiale.'
+      name: 'Danny Cibangu',
+      role: 'Coordonnateur National',
+      image: '/assets/images/teams/danny.jpg',
+      bio: 'Chercheur en économie publique et sociale avec 8 ans d\'expérience en gouvernance ONG. Spécialiste en planification financière et stratégique.'
     },
     {
-      name: 'Jean-Baptiste Ouédraogo',
-      role: 'Directeur des Programmes',
-      image: '/assets/team/jean-baptiste-ouedraogo.jpg',
-      bio: 'Ingénieur agronome et expert en gestion de projets. 15 ans d\'expérience terrain en Afrique de l\'Ouest. Spécialiste en développement rural.'
+      name: 'Mary Banza',
+      role: 'Responsable Administratif et Financier',
+      image: '/assets/images/teams/mary.jpg',
+      bio: 'Financière spécialisée en micro-crédits, expérimentée des environnements multiculturels. Passionnée et rigoureuse.'
     },
     {
-      name: 'Isabella Rodriguez',
-      role: 'Responsable Amérique Latine',
-      image: '/assets/team/isabella-rodriguez.jpg',
-      bio: 'Master en Relations Internationales (Sciences Po). Coordinatrice régionale basée à São Paulo. Experte en programmes environnementaux.'
+      name: 'Godelieve Mushiya',
+      role: 'Responsable de la Communication et Relations Publiques',
+      image: '/assets/images/about.png',
+      bio: 'Communicologue professionnelle, attachée de presse expérimentée. Spécialiste des NTICs et réseaux sociaux.'
     },
     {
-      name: 'Dr. Amadou Diallo',
-      role: 'Directeur Santé & Nutrition',
-      image: '/assets/team/amadou-diallo.jpg',
-      bio: 'Médecin de santé publique, ancien coordinateur OMS. Spécialiste en santé maternelle et infantile en zones rurales.'
+      name: 'Grâce Kashama',
+      role: 'Chargée de Programme',
+      image: '/assets/images/teams/grace.jpg',
+      bio: 'Avocat près la cour d\'appel de Kinshasa Matete. Chercheur en droit public et consultant en matières électorales.'
     },
     {
-      name: 'Sophie Laurent',
-      role: 'Directrice Financière',
-      image: '/assets/team/sophie-laurent.jpg',
-      bio: 'Expert-comptable, 12 ans dans le secteur associatif. Responsable de la transparence financière et des audits externes.'
+      name: 'Melchior Kayumba',
+      role: 'Coordonnateur Provincial du Kasaï-Oriental',
+      image: '/assets/images/teams/melchior.jpg',
+      bio: 'Ingénieur agronome expérimenté en projets ruraux. Animateur et sensibilisateur, membre fondateur du CJACO.'
     },
     {
-      name: 'Carlos Mendoza',
-      role: 'Coordinateur Innovation',
-      image: '/assets/team/carlos-mendoza.jpg',
-      bio: 'Ingénieur en technologies numériques. Développement de solutions tech pour l\'éducation et la santé en zones isolées.'
+      name: 'Smith Masela',
+      role: 'Coordonnateur Provincial du Haut-Katanga',
+      image: '/assets/images/teams/smith.jpeg',
+      bio: 'Criminologue spécialisé en sécurité intérieure. Leader d\'opinion militant pour la justice sociale et les plus fragiles.'
     }
   ];
 

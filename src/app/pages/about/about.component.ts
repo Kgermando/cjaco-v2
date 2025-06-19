@@ -13,83 +13,85 @@ export class AboutComponent implements OnInit {
 
   values = [
     {
-      icon: 'fas fa-heart',
-      title: 'Compassion',
-      description: 'Nous agissons avec empathie et bienveillance envers toutes les communautés que nous servons.'
-    },
-    {
-      icon: 'fas fa-balance-scale',
-      title: 'Équité',
-      description: 'Nous croyons en l\'égalité des chances et œuvrons pour réduire les inégalités.'
-    },
-    {
-      icon: 'fas fa-handshake',
-      title: 'Intégrité',
-      description: 'Nous agissons avec transparence et honnêteté dans toutes nos actions.'
-    },
-    {
       icon: 'fas fa-users',
-      title: 'Collaboration',
-      description: 'Nous travaillons en partenariat avec les communautés et les organisations locales.'
+      title: 'Unité',
+      description: `Ensemble Nous pouvons, le développement est une construction sociale,
+chacun a un rôle à jouer. Nous sommes attachés la philosophie de l'Ubuntu, Et nous
+prônons la solidarité en principe.`
     },
     {
-      icon: 'fas fa-lightbulb',
-      title: 'Innovation',
-      description: 'Nous développons des solutions créatives pour répondre aux défis contemporains.'
+      icon: 'fas fa-medal',
+      title: 'Rigueur',
+      description: `
+      Chacun doit être exigent avec lui-même et s'obliger de produire le meilleur de
+lui-même sans compromettre le devoir qui l'oblige envers sa communauté.
+      `
     },
     {
-      icon: 'fas fa-globe',
-      title: 'Durabilité',
-      description: 'Nous intégrons les principes du développement durable dans tous nos projets.'
-    }
+      icon: 'fas fa-trophy',
+      title: 'Excellence ',
+      description: `
+      Chaque action quoique restant perfectible, doit viser et produire toujours
+le meilleur résultat possible.
+      `
+    },
   ];
   timeline = [
     {
-      year: '2008',
-      title: 'Fondation de CJACO',
-      description: 'Création de l\'organisation par un collectif de professionnels du développement international. Première mission exploratoire au Mali.'
-    },
-    {
-      year: '2009',
-      title: 'Premier programme éducatif',
-      description: 'Lancement du programme "École pour Tous" au Mali, construction de 3 écoles et formation de 15 enseignants.'
-    },
-    {
-      year: '2011',
-      title: 'Expansion régionale',
-      description: 'Extension des activités au Burkina Faso et au Sénégal. Création du programme de santé maternelle et infantile.'
-    },
-    {
-      year: '2014',
-      title: 'Diversification des programmes',
-      description: 'Lancement des programmes environnement et agriculture durable. Partenariat avec l\'Union Européenne.'
+      year: '2012',
+      title: 'La Révolution, oser passer en action',
+      description: `
+      Des jeunes fondent le CJACO pour faire échec
+au VIH/SIDA en responsabilisant les
+communautés sur le danger et la prévention
+de cette ennemi commun.
+      `
     },
     {
       year: '2016',
-      title: 'Certification internationale',
-      description: 'Obtention de la certification ISO 9001 et reconnaissance par les Nations Unies. Ouverture de bureaux régionaux.'
+      title: 'La vocation nationale',
+      description: `
+      Le Collectif des Jeunes Ambassadeurs du
+      Congo ouvre des actions à Kinshasa et à
+      Lubumbashi, et le siège national s’établi à
+      Kinshasa.
+      `
     },
     {
-      year: '2018',
-      title: 'Innovation technologique',
-      description: 'Développement de solutions numériques pour l\'éducation à distance et la télémédecine rurale.'
+      year: '2021',
+      title: 'Le Leadership transformationnel à l’œuvre',
+      description: `
+      10 ans depuis que cette initiative a vu le jour,
+      et ayant connu diverses expériences en
+      interne comme en externe, le CJAKOR, a jugé
+      opportun de revoir son positionnement, sa
+      dénomination (pour soutenir sa portée
+      nationale), sa stratégie, sa formation, et de
+      revisiter ses objectifs.
+      `
     },
     {
-      year: '2020',
-      title: 'Adaptation COVID-19',
-      description: 'Mise en place de protocoles sanitaires et programmes d\'urgence. Formation de 500 agents de santé communautaire.'
+      year: '2022',
+      title: 'Les premiers pas dans des rtenariats subventionnés',
+      description: `
+      Le CJACO débute son expérience dans des
+      contrats de subvention, et multiplie les actions
+      de terrain.
+      `
     },
     {
-      year: '2023',
-      title: 'Expansion Amérique latine',
-      description: 'Ouverture de programmes au Brésil, Pérou et Colombie. Focus sur la protection de l\'Amazonie.'
-    },
-    {
-      year: '2025',
-      title: 'Vision 2030',
-      description: 'Stratégie décennale : atteindre 500,000 bénéficiaires directs et être neutre en carbone d\'ici 2030.'
-    }
-  ];
+      year: '2024',
+      title: 'Devenir grand : une action, une perspective',
+      description: `
+      Faire encore mieux qu’hier, Revisitation des
+      documents d’organisations, des objectifs et
+      premières missions d’audit externe. Ouverture
+      au réseau des agences des Nations Unies et
+      participations à des conférences
+      internationales.
+      `
+    }, 
+  ]; 
 
   constructor(private seoService: SeoService) { }
 
