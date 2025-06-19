@@ -21,25 +21,25 @@ export class HomeComponent implements OnInit {
       name: 'Aminata Traoré',
       role: 'Enseignante - Programme Éducation Mali',
       content: 'Grâce à CJACO, notre école a été rénovée et équipée. Aujourd\'hui, 300 enfants de plus peuvent accéder à une éducation de qualité dans notre village.',
-      image: '/assets/testimonials/aminata.jpg'
+      image: '/assets/images/about-icon.png'
     },
     {
       name: 'Dr. Jean-Baptiste Kone',
       role: 'Médecin-Chef - Centre de Santé, Burkina Faso',
       content: 'Le partenariat avec CJACO nous a permis d\'améliorer l\'accès aux soins pour plus de 15,000 habitants de la région. Leur approche collaborative est exemplaire.',
-      image: '/assets/testimonials/jean-baptiste.jpg'
+      image: '/assets/images/about-icon.png'
     },
     {
       name: 'Fatou Diallo',
       role: 'Coopérative agricole - Sénégal',
       content: 'Nous avons multiplié par trois nos rendements grâce aux techniques modernes enseignées par CJACO. Notre coopérative emploie maintenant 45 femmes.',
-      image: '/assets/testimonials/fatou.jpg'
+      image: '/assets/images/about-icon.png'
     },
     {
       name: 'Maria Santos',
       role: 'Responsable environnement - Brésil',
       content: 'Le projet de reforestation de CJACO a permis de planter 50,000 arbres dans notre région et de former 200 jeunes aux métiers verts.',
-      image: '/assets/testimonials/maria.jpg'
+      image: '/assets/images/about-icon.png'
     }
   ];
 
