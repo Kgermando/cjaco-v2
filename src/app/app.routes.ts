@@ -5,6 +5,9 @@ import { OrganisationComponent } from './pages/organisation/organisation.compone
 import { ActivitiesComponent } from './pages/activities/activities.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { DonateComponent } from './pages/donate/donate.component';
+import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -31,11 +34,25 @@ export const routes: Routes = [
     path: 'contact',
     component: ContactComponent,
     title: 'Contact - CJACO | Nous Contacter'
-  },
-  {
+  },  {
     path: 'donate',
     component: DonateComponent,
     title: 'Faire un Don - CJACO | Soutenez notre Mission'
+  },
+  {
+    path: 'admin/login',
+    component: AdminLoginComponent,
+    title: 'Administration - Connexion | CJACO'
+  },
+  {
+    path: 'admin/dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [AdminGuard],
+    title: 'Administration - Tableau de bord | CJACO'
+  },
+  {
+    path: 'admin',
+    redirectTo: 'admin/dashboard'
   },
   {
     path: '**',

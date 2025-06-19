@@ -1,0 +1,167 @@
+<div class="admin-dashboard">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <h1>
+        <span class="icon">📊</span>
+        Tableau de bord administrateur
+      </h1>      <div class="header-actions">
+        <div class="storage-info">
+          <span class="storage-mode" [class.api-mode]="storageInfo.mode.includes('API')">
+            {{ storageInfo.mode }}
+          </span>
+          <button class="btn btn-sm btn-outline" (click)="toggleStorageMode()">
+            <span class="icon">🔄</span>
+            Basculer
+          </button>
+        </div>
+        <button class="btn btn-info" (click)="generateDemoData()" *ngIf="pageVisits.length === 0">
+          <span class="icon">🎲</span>
+          Générer des données de test
+        </button>
+        <button class="btn btn-secondary" (click)="refresh()">
+          <span class="icon">🔄</span>
+          Actualiser
+        </button>
+        <button class="btn btn-danger" (click)="logout()">
+          <span class="icon">🚪</span>
+          Déconnexion
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats Summary -->
+  <div class="stats-summary">
+    <div class="stat-card">
+      <div class="stat-icon">📈</div>
+      <div class="stat-content">
+        <h3>{{ totalVisits }}</h3>
+        <p>Visites totales</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">📄</div>
+      <div class="stat-content">
+        <h3>{{ pageVisits.length }}</h3>
+        <p>Pages visitées</p>
+      </div>
+    </div>
+    
+    <div class="stat-card" *ngIf="mostVisitedPage">
+      <div class="stat-icon">🏆</div>
+      <div class="stat-content">
+        <h3>{{ getPageIcon(mostVisitedPage.page) }} {{ mostVisitedPage.title }}</h3>
+        <p>Page la plus visitée ({{ mostVisitedPage.visits }} visites)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Visits Table -->
+  <div class="content-section">    <div class="section-header">
+      <h2>
+        <span class="icon">📋</span>
+        Statistiques par page
+      </h2>
+      <div class="header-controls">
+        <button 
+          class="btn btn-success" 
+          (click)="exportData()"
+          *ngIf="pageVisits.length > 0"
+        >
+          <span class="icon">📥</span>
+          Exporter JSON
+        </button>
+        <button 
+          class="btn btn-warning" 
+          (click)="clearAnalytics()"
+          *ngIf="pageVisits.length > 0"
+        >
+          <span class="icon">🗑️</span>
+          Effacer les données
+        </button>
+      </div>
+    </div>    <div *ngIf="pageVisits.length === 0" class="no-data">
+      <div class="no-data-icon">📊</div>
+      <h3>Aucune donnée disponible</h3>
+      <p>Les statistiques de visite apparaîtront ici une fois que les utilisateurs commenceront à naviguer sur le site.</p>
+      
+      <!-- Section d'import -->
+      <div class="import-section">
+        <h4>Importer des données</h4>
+        <div class="file-input-group">
+          <input 
+            type="file" 
+            id="fileInput"
+            accept=".json"
+            (change)="onFileSelected($event)"
+            class="file-input"
+          >
+          <label for="fileInput" class="file-label">
+            <span class="icon">📁</span>
+            {{ selectedFile ? selectedFile.name : 'Choisir un fichier JSON' }}
+          </label>
+          <button 
+            class="btn btn-primary" 
+            (click)="importData()"
+            [disabled]="!selectedFile"
+          >
+            <span class="icon">📤</span>
+            Importer
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container" *ngIf="pageVisits.length > 0">
+      <table class="analytics-table">
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Titre</th>
+            <th>Visites</th>
+            <th>Pourcentage</th>
+            <th>Dernière visite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let page of pageVisits; trackBy: trackByPage" class="page-row">
+            <td class="page-column">
+              <span class="page-icon">{{ getPageIcon(page.page) }}</span>
+              <code>{{ page.page || '/' }}</code>
+            </td>
+            <td class="title-column">{{ page.title }}</td>
+            <td class="visits-column">
+              <span class="visits-badge">{{ page.visits }}</span>
+            </td>
+            <td class="percentage-column">
+              <div class="percentage-bar">
+                <div 
+                  class="percentage-fill" 
+                  [style.width.%]="getVisitPercentage(page.visits)"
+                ></div>
+                <span class="percentage-text">{{ getVisitPercentage(page.visits) | number:'1.1-1' }}%</span>
+              </div>
+            </td>
+            <td class="date-column">{{ formatDate(page.lastVisited) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Info Section -->
+  <div class="info-section">
+    <h3>
+      <span class="icon">ℹ️</span>
+      Informations
+    </h3>
+    <ul>
+      <li>Les statistiques sont stockées localement dans le navigateur</li>
+      <li>Les données sont mises à jour en temps réel lors de la navigation</li>
+      <li>Vous pouvez effacer toutes les données en cliquant sur "Effacer les données"</li>
+      <li>Les pourcentages sont calculés par rapport au nombre total de visites</li>
+    </ul>
+  </div>
+</div>
