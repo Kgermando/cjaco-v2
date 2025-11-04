@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { OrganisationComponent } from './pages/organisation/organisation.component';
 import { ActivitiesComponent } from './pages/activities/activities.component';
+import { ActivityViewComponent } from './pages/activities/activity-view/activity-view.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { DonateComponent } from './pages/donate/donate.component';
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
@@ -29,6 +30,11 @@ export const routes: Routes = [
     path: 'activities',
     component: ActivitiesComponent,
     title: 'Nos Activités - CJACO | Programmes et Projets'
+  },
+  {
+    path: 'activities/:title',
+    component: ActivityViewComponent,
+    title: 'Détails de l\'Activité - CJACO | Informations Complètes'
   },
   {
     path: 'contact',

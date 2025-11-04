@@ -8,99 +8,127 @@
     </div>
   </section>
 
-  <section class="programs">
+  <!-- Projects Section -->
+  <section class="projects">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Nos Programmes</span>
-        <h2 class="section-title">Domaines d'Intervention</h2>
+      <!-- <div class="section-header">
+        <span class="section-tag">Nos Activités </span>
+        <h2 class="section-title">Actions Concrètes, Impact Réel</h2>
+      </div> -->
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <a [routerLink]="['/activities', 'participation-autochtones']" class="card-link">
+            <div class="card-image">
+              <img src="/assets/images/projets/p1.jpg" alt="Gouvernance">
+            </div>
+            <div class="card-content">
+              <div class="card-category">Gouvernance</div>
+              <h3 class="card-title">Participation des populations autochtones</h3>
+              <p class="card-description">
+                Des communautés d'exclus sont sensibilisées et participent au processus de
+                gouvernance par leurs votes.
+              </p>
+              <div class="card-footer">
+                <span class="read-more">
+                  Lire la suite
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="project-card">
+          <a [routerLink]="['/activities', 'formation-gouvernance']" class="card-link">
+            <div class="card-image">
+              <img src="/assets/images/projets/p2.jpg" alt="Participation citoyennes">
+            </div>
+            <div class="card-content">
+              <div class="card-category">Participation citoyennes</div>
+              <h3 class="card-title">Formation à la gouvernance décentralisée</h3>
+              <p class="card-description">
+                Des jeunes comprennent et discutent activement de la gouvernance des entités
+                décentralisées, donc leurs communautés directes.
+              </p>
+              <div class="card-footer">
+                <span class="read-more">
+                  Lire la suite
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="project-card">
+          <a [routerLink]="['/activities', 'plaidoyer-economique']" class="card-link">
+            <div class="card-image">
+              <img src="/assets/images/about.png" alt="Developpement sociaux economique">
+            </div>
+            <div class="card-content">
+              <div class="card-category">Développement socio-économique</div>
+              <h3 class="card-title">Plaidoyer pour les initiatives économiques privées</h3>
+              <p class="card-description">
+                Un plaidoyer pour le développement des initiatives économiques privées est lancé et
+                des contacts sont établis avec l'autorité publique pour la matérialisation des dispositions.
+              </p>
+              <div class="card-footer">
+                <span class="read-more">
+                  Lire la suite
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="project-card">
+          <a [routerLink]="['/activities', 'gouvernance-autochtones']" class="card-link">
+            <div class="card-image">
+              <img src="/assets/images/projets/p2.jpg" alt="Participation citoyennes">
+            </div>
+            <div class="card-content">
+              <div class="card-category">Formation</div>
+              <h3 class="card-title">Formation à la gouvernance décentralisée</h3>
+              <p class="card-description">
+                Des jeunes comprennent et discutent activement de la gouvernance des entités
+                décentralisées, donc leurs communautés directes.
+              </p>
+              <div class="card-footer">
+                <span class="read-more">
+                  Lire la suite
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <article class="project-card">
+          <a [routerLink]="['/activities', 'participation-autochtones']" class="card-link">
+            <div class="card-image">
+              <img src="/assets/images/about.png" alt="Developpement sociaux economique">
+            </div>
+            <div class="card-content">
+              <div class="card-category">Développement socio-économique</div>
+              <h3 class="card-title">Plaidoyer pour les initiatives économiques privées</h3>
+              <p class="card-description">
+                Un plaidoyer pour le développement des initiatives économiques privées est lancé et
+                des contacts sont établis avec l'autorité publique pour la matérialisation des dispositions.
+              </p>
+              <div class="card-footer">
+                <span class="read-more">
+                  Lire la suite
+                  <i class="fas fa-arrow-right"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </article>
       </div>
-      
-       <div class="programs-grid">
-        <div class="program-card">
-          <div class="program-icon">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>Le développement socio-économique</h3>
-          <p>
-            Susciter, encadrer et promouvoir les initiatives
-            entrepreneuriales et professionnelles des jeunes,
-            et concourir globalement au développement
-            socio-économique congolais.
-          </p>
-        </div>
 
-        <div class="program-card">
-          <div class="program-icon">
-            <i class="fas fa-vote-yea"></i>
-          </div>
-          <h3>La bonne gouvernance et
-            l'engagement civique</h3>
-          <p>
-            Militer pour la bonne gouvernance et une
-            participation citoyenne qualitative et active des
-            jeunes en particulier.
-          </p>
-        </div>
-
-        <div class="program-card">
-          <div class="program-icon">
-            <i class="fas fa-dove"></i>
-          </div>
-          <h3>Paix, Sécurité et cohésion sociale</h3>
-          <p>
-            Promouvoir la cohésion sociale, la culture de la
-            paix et la culture congolaise.
-          </p>
-        </div>
-
-        <div class="program-card">
-          <div class="program-icon">
-            <i class="fas fa-balance-scale"></i>
-          </div>
-          <h3>Droits Humains et Genre</h3>
-          <p>
-            Promouvoir les droits humains dans leur
-            généralité et lutter contre les violences basées
-            sur le genre.
-          </p>
-        </div>
-
-        <div class="program-card">
-          <div class="program-icon">
-            <i class="fas fa-heartbeat"></i>
-          </div>
-          <h3>La santé</h3>
-          <p>
-            Pourvoir à l'information sanitaire et militer pour
-            l'amélioration de l'accès et la qualité de la santé
-            en faveur des jeunes et par les jeunes.
-          </p>
-        </div>
-
-        <div class="program-card">
-          <div class="program-icon">
-            <i class="fas fa-seedling"></i>
-          </div>
-          <h3>L'environnement et l'agriculture</h3>
-          <p>
-            Concourir à la protection de l'environnement et la
-            capitalisation de la transition énergétique et la
-            promotion d'une agriculture saine et durable
-          </p>
-        </div>
-
-        <div class="program-card">
-          <div class="program-icon">
-            <i class="fas fa-wifi"></i>
-          </div>
-          <h3>Accès à l'information et aux NTICs</h3>
-          <p>
-            Promouvoir des innovations numériques et militer
-            pour un accès plus général à l'information de
-            qualité.
-          </p>
-        </div>
-      </div> 
     </div>
   </section>
+
 </main>

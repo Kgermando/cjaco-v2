@@ -1,17 +1,29 @@
 {
   "analytics": [
     {
-      "page": "/admin/dashboard",
-      "title": "Administration - Tableau de bord | CJACO",
-      "visits": 2,
-      "lastVisited": "2025-06-19T19:43:22.145Z"
+      "page": "/activities",
+      "title": "Nos Activités - CJACO | Programmes et Projets Humanitaires",
+      "visits": 4,
+      "lastVisited": "2025-11-04T13:47:46.125Z"
     },
     {
-      "page": "/organisation",
-      "title": "Notre Organisation - CJACO | Structure, Équipe et Gouvernance",
+      "page": "/activities/tess",
+      "title": "Nos Activités - CJACO | Programmes et Projets Humanitaires",
       "visits": 1,
-      "lastVisited": "2025-06-19T19:43:11.451Z"
+      "lastVisited": "2025-11-04T10:20:55.132Z"
+    },
+    {
+      "page": "/activities/participation-autochtones",
+      "title": "Détails de l'Activité - CJACO | Informations Complètes",
+      "visits": 22,
+      "lastVisited": "2025-11-04T13:56:29.897Z"
+    },
+    {
+      "page": "/",
+      "title": "CJACO - Construire un Avenir Durable | ONG Développement International",
+      "visits": 1,
+      "lastVisited": "2025-11-04T13:47:42.510Z"
     }
   ],
-  "lastUpdated": "2025-06-19T19:43:22.145Z"
+  "lastUpdated": "2025-11-04T13:56:29.897Z"
 }

@@ -1,0 +1,191 @@
+<div class="activity-view" *ngIf="activity && !isLoading">
+    <!-- Header -->
+    <div class="article-header">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a routerLink="/">Accueil</a>
+                <span>/</span>
+                <a routerLink="/activities">Activités</a>
+                <span>/</span>
+                <span>{{ activity.title }}</span>
+            </nav>
+
+            <!-- Category -->
+            <div class="category" *ngIf="activity.category">
+                {{ activity.category }}
+            </div>
+
+            <!-- Title -->
+            <h1 class="article-title">{{ activity.title }}</h1>
+
+            <!-- Meta -->
+            <div class="article-meta">
+                <span *ngIf="activity.location">
+                    <i class="fas fa-map-marker-alt"></i> 
+                    {{ activity.location }}
+                </span> 
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Image -->
+    <div class="featured-image" *ngIf="activity.image">
+        <img [src]="activity.image" [alt]="activity.title">
+    </div>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="container">
+            <!-- Description -->
+            <div class="article-body" *ngIf="activity.description">
+                <p>{{ activity.description }}</p>
+            </div>
+
+            <!-- Short Description -->
+            <div class="article-intro" *ngIf="activity.shortDescription">
+                <p>{{ activity.shortDescription }}</p>
+            </div>
+          
+            <!-- Gallery -->
+            <div class="article-section" *ngIf="hasContent(activity.gallery)">
+                <h2>Galerie</h2>
+                <div class="simple-gallery">
+                    <img *ngFor="let image of activity.gallery; let i = index" [src]="image"
+                        [alt]="activity.title + ' - ' + (i + 1)" (click)="openGallery(i)">
+                </div>
+            </div>
+            
+            <!-- Share Buttons -->
+            <div class="share-section">
+                <h3>Partager cet article</h3>
+                <div class="share-buttons">
+                    <button (click)="shareOnSocialMedia('facebook')" class="share-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button (click)="shareOnSocialMedia('twitter')" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button (click)="shareOnSocialMedia('linkedin')" class="share-btn linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </button>
+                    <button (click)="shareOnSocialMedia('whatsapp')" class="share-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Related Articles -->
+    <section class="related-articles" *ngIf="hasContent(relatedActivities)">
+        <div class="container">
+            <h2 class="section-title">Autres articles</h2>
+            <div class="articles-layout">
+                <!-- Main Articles (8 columns) -->
+                <div class="articles-main">
+                    <article class="article-card" *ngFor="let related of relatedActivities.slice(0, 2)">
+                        <a [routerLink]="['/activities', related.id]" class="card-link">
+                            <div class="card-image" *ngIf="related.image">
+                                <img [src]="related.image" [alt]="related.title">
+                            </div>
+                            <div class="card-content">
+                                <div class="card-category" *ngIf="related.category">
+                                    {{ related.category }}
+                                </div>
+                                <h3 class="card-title">{{ related.title }}</h3>
+                                <p class="card-description" *ngIf="related.shortDescription">
+                                    {{ related.shortDescription }}
+                                </p>
+                                <div class="card-footer">
+                                    <span class="read-more">
+                                        Lire la suite
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+
+                <!-- Sidebar Articles (4 columns) -->
+                <aside class="articles-sidebar" *ngIf="relatedActivities.length > 2">
+                    <article class="article-card-mini" *ngFor="let related of relatedActivities.slice(2, 5)">
+                        <a [routerLink]="['/activities', related.id]" class="card-mini-link">
+                            <div class="card-mini-image" *ngIf="related.image">
+                                <img [src]="related.image" [alt]="related.title">
+                            </div>
+                            <div class="card-mini-content">
+                                <div class="card-mini-category" *ngIf="related.category">
+                                    {{ related.category }}
+                                </div>
+                                <h4 class="card-mini-title">{{ related.title }}</h4>
+                            </div>
+                        </a>
+                    </article>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back Link -->
+    <div class="back-section">
+        <div class="container">
+            <a routerLink="/activities" class="back-link">
+                <i class="fas fa-arrow-left"></i> Retour aux activités
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Gallery Modal -->
+<div class="gallery-modal" *ngIf="showGalleryModal && activity && activity.gallery && activity.gallery.length > 0"
+    (click)="closeGallery()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="closeGallery()" aria-label="Fermer la galerie">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <button class="modal-nav modal-prev" (click)="previousImage()" aria-label="Image précédente">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div class="modal-image-container">
+            <img [src]="activity.gallery![selectedGalleryIndex]"
+                [alt]="activity.title + ' - Image ' + (selectedGalleryIndex + 1)" class="modal-image">
+            <div class="modal-counter">
+                {{ selectedGalleryIndex + 1 }} / {{ activity.gallery!.length }}
+            </div>
+        </div>
+
+        <button class="modal-nav modal-next" (click)="nextImage()" aria-label="Image suivante">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Loading State -->
+<div class="loading-container" *ngIf="isLoading">
+    <div class="loading-content">
+        <div class="spinner">
+            <div class="spinner-inner"></div>
+        </div>
+        <p class="loading-text">Chargement du projet...</p>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Error State -->
+<div class="error-container" *ngIf="!activity && !isLoading">
+    <div class="error-content">
+        <i class="fas fa-exclamation-triangle error-icon"></i>
+        <h2 class="error-title">Projet introuvable</h2>
+        <p class="error-text">Le projet que vous recherchez n'existe pas ou a été supprimé.</p>
+        <a routerLink="/activities" class="btn-primary">
+            <i class="fas fa-arrow-left"></i>
+            <span>Retour aux activités</span>
+        </a>
+    </div>
+</div>
