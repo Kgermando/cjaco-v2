@@ -424,9 +424,42 @@
         justify-content: space-between;
         align-items: center;
         font-size: 0.9rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
 
         .project-location {
           color: var(--text-light);
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          i {
+            color: var(--primary-color);
+          }
+        }
+
+        .project-read-more {
+          color: var(--primary-color);
+          text-decoration: none;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: all 0.3s ease;
+
+          &:hover {
+            gap: 0.75rem;
+            color: var(--secondary-color);
+
+            i {
+              transform: translateX(4px);
+            }
+          }
+
+          i {
+            transition: transform 0.3s ease;
+          }
         }
 
         .project-status {

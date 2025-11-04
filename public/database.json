@@ -1,4 +1,44 @@
 {
   "analytics": [],
-  "lastUpdated": null
+  "lastUpdated": null,
+  "activities": [
+    {
+      "id": "participation-autochtones",
+      "title": "Participation des populations autochtones",
+      "category": "Gouvernance",
+      "shortDescription": "Des communautés d'exclus sont sensibilisées et participent au processus de gouvernance par leurs votes.",
+      "description": "Ce projet vise à renforcer la participation citoyenne des populations autochtones marginalisées dans les processus démocratiques.",
+      "image": "/assets/images/projets/p1.jpg",
+      "location": "Kasaï, République Démocratique du Congo",
+      "duration": "2022 - En cours",
+      "budget": "850,000 USD",
+      "status": "En cours",
+      "objectives": [
+        "Sensibiliser 15,000 personnes sur leurs droits civiques",
+        "Augmenter le taux de participation électorale de 40%"
+      ],
+      "achievements": [
+        {
+          "metric": "12,500+",
+          "label": "Personnes sensibilisées",
+          "icon": "fas fa-users"
+        }
+      ],
+      "impact": "Plus de 12,500 personnes sensibilisées avec 85% de participation aux élections.",
+      "beneficiaries": "25,000 personnes directement touchées",
+      "partners": ["Union Européenne", "PNUD"],
+      "gallery": [
+        "/assets/images/projets/p1.jpg",
+        "/assets/images/projets/p2.jpg"
+      ],
+      "testimonials": [
+        {
+          "text": "Aujourd'hui, nous participons activement aux décisions.",
+          "author": "Marie Tshombe",
+          "role": "Leader communautaire"
+        }
+      ],
+      "relatedActivities": ["formation-gouvernance"]
+    }
+  ]
 }

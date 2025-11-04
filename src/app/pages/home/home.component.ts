@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
+import { DataService } from '../../services/data.service';
+import { Activity } from '../../models/activity.interface';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +12,8 @@ import { SeoService } from '../../services/seo.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  recentActivities: Activity[] = [];
+  
   stats = [
     { number: '1759+', label: 'Bénéficiaires directs' },
     { number: '300+', label: 'Activités réalisées' },
@@ -43,33 +47,6 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  recentProjects = [
-    {
-      title: 'École Numérique Mali',
-      location: 'Région de Kayes, Mali',
-      description: 'Formation de 150 enseignants aux outils numériques et équipement de 12 écoles rurales.',
-      impact: '3,200 élèves bénéficiaires',
-      status: 'En cours',
-      image: '/assets/projects/ecole-numerique-mali.jpg'
-    },
-    {
-      title: 'Agroécologie Burkina',
-      location: 'Province du Yatenga, Burkina Faso',
-      description: 'Formation de 300 agriculteurs aux techniques agroécologiques et mise en place de banques de semences.',
-      impact: '1,800 familles, +40% rendements',
-      status: 'Terminé',
-      image: '/assets/projects/agroecologie-burkina.jpg'
-    },
-    {
-      title: 'Reforestation Amazonie',
-      location: 'État d\'Acre, Brésil',
-      description: 'Plantation de 25,000 arbres indigènes et formation de 50 jeunes aux métiers de l\'environnement.',
-      impact: '500 hectares restaurés',
-      status: 'En cours',
-      image: '/assets/projects/reforestation-amazonie.jpg'
-    }
-  ];
-
   partners = [
     { name: 'Union Européenne', logo: '/assets/partners/eu.png' },
     { name: 'AFD', logo: '/assets/partners/afd.png' },
@@ -79,9 +56,16 @@ export class HomeComponent implements OnInit {
     { name: 'Fondation Gates', logo: '/assets/partners/gates.png' }
   ];
 
-  constructor(private seoService: SeoService) { }
+  constructor(
+    private seoService: SeoService,
+    private dataService: DataService
+  ) { }
 
-  ngOnInit() {    this.seoService.updateSEO({
+  ngOnInit() {
+    // Récupérer les 3 dernières activités
+    this.loadRecentActivities();
+    
+    this.seoService.updateSEO({
       title: 'CJACO - Construire un Avenir Durable | ONG Développement International',
       description: 'CJACO est une organisation non gouvernementale dédiée au développement durable en Afrique et Amérique latine. 16 ans d\'expérience, 28 pays, 125,000+ bénéficiaires. Éducation, santé, environnement, agriculture.',
       keywords: 'ONG, développement durable, éducation, santé, environnement, agriculture, Afrique, Amérique latine, coopération internationale, solidarité',
@@ -106,5 +90,11 @@ export class HomeComponent implements OnInit {
         'https://linkedin.com/company/cjaco'
       ]
     });
+  }
+
+  loadRecentActivities() {
+    // Récupérer toutes les activités et prendre les 3 dernières
+    const allActivities = this.dataService.getActivities();
+    this.recentActivities = allActivities.slice(-3).reverse(); // Les 3 dernières, en ordre inverse
   }
 }

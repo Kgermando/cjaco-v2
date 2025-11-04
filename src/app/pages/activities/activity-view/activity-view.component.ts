@@ -4,20 +4,8 @@ import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { DataService } from '../../../services/data.service';
 import { SeoService } from '../../../services/seo.service';
 import { Subject, takeUntil } from 'rxjs';
+import { Activity } from '../../../models/activity.interface';
 
-interface Activity {
-  id: string;
-  title: string;
-  category: string;
-  shortDescription: string;
-  description: string;
-  image: string;
-  location?: string;  
-  partners?: string[];
-  gallery?: string[]; 
-  relatedActivities?: string[];
-}
- 
 
 @Component({
   selector: 'app-activity-view',
