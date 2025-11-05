@@ -1,0 +1,40 @@
+<div class="admin-layout" [class.sidebar-collapsed]="sidebarCollapsed()">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">🌍</span>
+        <span class="logo-text" *ngIf="!sidebarCollapsed()">CJACO Admin</span>
+      </div>
+      <button class="toggle-btn" (click)="toggleSidebar()" title="Toggle Sidebar">
+        <span *ngIf="!sidebarCollapsed()">◀</span>
+        <span *ngIf="sidebarCollapsed()">▶</span>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a 
+        *ngFor="let item of menuItems"
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        class="nav-item"
+        [title]="item.label">
+        <span class="nav-icon">{{ item.icon }}</span>
+        <span class="nav-label" *ngIf="!sidebarCollapsed()">{{ item.label }}</span>
+        <span class="nav-badge" *ngIf="item.badge && !sidebarCollapsed()">{{ item.badge }}</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="logout()" [title]="sidebarCollapsed() ? 'Déconnexion' : ''">
+        <span class="logout-icon">🚪</span>
+        <span class="logout-text" *ngIf="!sidebarCollapsed()">Déconnexion</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="admin-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

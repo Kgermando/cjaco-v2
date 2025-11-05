@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
-import { DataService } from '../../../services/data.service';
+import { ActivityService } from '../../../services/activity.service';
 import { SeoService } from '../../../services/seo.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, forkJoin } from 'rxjs';
 import { Activity } from '../../../models/activity.interface';
 
 
@@ -25,7 +25,7 @@ export class ActivityViewComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dataService: DataService,
+    private activityService: ActivityService,
     private seoService: SeoService
   ) {}
 
@@ -50,35 +50,52 @@ export class ActivityViewComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadActivity(id: string) {
+  loadActivity(slug: string) {
     this.isLoading = true;
     
-    // Simulate async call (ready for backend)
-    setTimeout(() => {
-      const activityData = this.dataService.getActivityById(id);
-      
-      if (!activityData) {
+    this.activityService.getActivityBySlug(slug).subscribe({
+      next: (response) => {
+        if (response.status === 'success' && response.data) {
+          this.activity = response.data;
+          
+          // Load related activities
+          this.loadRelatedActivities();
+          
+          // Update SEO
+          this.updateSEO();
+        } else {
+          // Activity not found, redirect to activities page
+          this.router.navigate(['/activities']);
+        }
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading activity:', error);
+        this.isLoading = false;
+        // Redirect to activities page on error
         this.router.navigate(['/activities']);
-        return;
       }
-
-      this.activity = activityData as Activity;
-
-      // Load related activities
-      this.loadRelatedActivities();
-
-      // Update SEO
-      this.updateSEO();
-
-      this.isLoading = false;
-    }, 300);
+    });
   }
 
   loadRelatedActivities() {
-    if (this.activity?.relatedActivities) {
-      this.relatedActivities = this.activity.relatedActivities
-        .map((relId: string) => this.dataService.getActivityById(relId))
-        .filter((act: any): act is Activity => act !== undefined) as Activity[];
+    if (this.activity?.relatedActivities && this.activity.relatedActivities.length > 0) {
+      // Load all related activities in parallel
+      const relatedRequests = this.activity.relatedActivities.map(slug => 
+        this.activityService.getActivityBySlug(slug)
+      );
+      
+      forkJoin(relatedRequests).subscribe({
+        next: (responses) => {
+          this.relatedActivities = responses
+            .filter(response => response.status === 'success' && response.data)
+            .map(response => response.data);
+        },
+        error: (error) => {
+          console.error('Error loading related activities:', error);
+          this.relatedActivities = [];
+        }
+      });
     }
   }
 
@@ -89,7 +106,7 @@ export class ActivityViewComponent implements OnInit, OnDestroy {
         description: this.activity.shortDescription,
         keywords: `${this.activity.category}, ${this.activity.title}, CJACO, projet humanitaire`,
         type: 'article',
-        url: `https://cjaco.org/activities/${this.activity.id}`,
+        url: `https://cjaco.org/activities/${this.activity.slug}`,
         image: this.activity.image
       });
     }

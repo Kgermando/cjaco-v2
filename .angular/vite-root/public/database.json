@@ -21,8 +21,8 @@
     {
       "page": "/",
       "title": "CJACO - Construire un Avenir Durable | ONG Développement International",
-      "visits": 8,
-      "lastVisited": "2025-11-04T15:20:19.994Z"
+      "visits": 9,
+      "lastVisited": "2025-11-05T13:31:35.833Z"
     },
     {
       "page": "/activities/plaidoyer-economique",
@@ -41,7 +41,19 @@
       "title": "Détails de l'Activité - CJACO | Informations Complètes",
       "visits": 1,
       "lastVisited": "2025-11-04T15:19:21.022Z"
+    },
+    {
+      "page": "/admin/dashboard",
+      "title": "Administration - Tableau de bord | CJACO",
+      "visits": 6,
+      "lastVisited": "2025-11-05T14:51:09.668Z"
+    },
+    {
+      "page": "/admin/activities",
+      "title": "Administration - Gestion des Activités | CJACO",
+      "visits": 9,
+      "lastVisited": "2025-11-05T16:23:51.689Z"
     }
   ],
-  "lastUpdated": "2025-11-04T15:20:19.994Z"
+  "lastUpdated": "2025-11-05T16:23:51.689Z"
 }

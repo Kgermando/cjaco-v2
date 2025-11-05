@@ -171,7 +171,7 @@ growth">8</a> ,
           <div class="project-image">
             <img [src]="activity.image" [alt]="activity.title">
             <div class="project-overlay">
-              <a [routerLink]="['/activities', activity.title]" class="project-link">Voir plus</a>
+              <a [routerLink]="['/activities', activity.slug]" class="project-link">Voir plus</a>
             </div>
           </div>
           <div class="project-content">
@@ -184,7 +184,7 @@ growth">8</a> ,
               <!-- <span class="project-location" *ngIf="activity.location">
                 <i class="fas fa-map-marker-alt"></i> {{ activity.location }}
               </span> -->
-              <a [routerLink]="['/activities', activity.title]" class="project-read-more">
+              <a [routerLink]="['/activities', activity.slug]" class="project-read-more">
                 Lire la suite <i class="fas fa-arrow-right"></i>
               </a>
             </div>

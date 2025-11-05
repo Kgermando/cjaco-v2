@@ -1,35 +1,35 @@
 <div class="admin-dashboard">
-  <!-- Header -->
-  <header class="dashboard-header">
+  <!-- Page Header -->
+  <div class="page-header">
     <div class="header-content">
-      <h1>
-        <span class="icon">📊</span>
-        Tableau de bord administrateur
-      </h1>      <div class="header-actions">
+      <div class="header-left">
+        <h1>
+          <span class="icon">📊</span>
+          Tableau de bord
+        </h1>
+        <p class="subtitle">Vue d'ensemble des statistiques de visites</p>
+      </div>
+      <div class="header-actions">
         <div class="storage-info">
           <span class="storage-mode" [class.api-mode]="storageInfo.mode.includes('API')">
             {{ storageInfo.mode }}
           </span>
-          <button class="btn btn-sm btn-outline" (click)="toggleStorageMode()">
+          <button class="btn btn-sm btn-outline" (click)="toggleStorageMode()" title="Basculer le mode de stockage">
             <span class="icon">🔄</span>
             Basculer
           </button>
         </div>
         <button class="btn btn-info" (click)="generateDemoData()" *ngIf="pageVisits.length === 0">
           <span class="icon">🎲</span>
-          Générer des données de test
+          Générer des données
         </button>
         <button class="btn btn-secondary" (click)="refresh()">
           <span class="icon">🔄</span>
           Actualiser
         </button>
-        <button class="btn btn-danger" (click)="logout()">
-          <span class="icon">🚪</span>
-          Déconnexion
-        </button>
       </div>
     </div>
-  </header>
+  </div>
 
   <!-- Stats Summary -->
   <div class="stats-summary">
@@ -40,7 +40,7 @@
         <p>Visites totales</p>
       </div>
     </div>
-    
+
     <div class="stat-card">
       <div class="stat-icon">📄</div>
       <div class="stat-content">
@@ -48,7 +48,7 @@
         <p>Pages visitées</p>
       </div>
     </div>
-    
+
     <div class="stat-card" *ngIf="mostVisitedPage">
       <div class="stat-icon">🏆</div>
       <div class="stat-content">
@@ -59,54 +59,39 @@
   </div>
 
   <!-- Page Visits Table -->
-  <div class="content-section">    <div class="section-header">
+  <div class="content-section">
+    <div class="section-header">
       <h2>
         <span class="icon">📋</span>
         Statistiques par page
       </h2>
       <div class="header-controls">
-        <button 
-          class="btn btn-success" 
-          (click)="exportData()"
-          *ngIf="pageVisits.length > 0"
-        >
+        <button class="btn btn-success" (click)="exportData()" *ngIf="pageVisits.length > 0">
           <span class="icon">📥</span>
           Exporter JSON
         </button>
-        <button 
-          class="btn btn-warning" 
-          (click)="clearAnalytics()"
-          *ngIf="pageVisits.length > 0"
-        >
+        <button class="btn btn-warning" (click)="clearAnalytics()" *ngIf="pageVisits.length > 0">
           <span class="icon">🗑️</span>
           Effacer les données
         </button>
       </div>
-    </div>    <div *ngIf="pageVisits.length === 0" class="no-data">
+    </div>
+    <div *ngIf="pageVisits.length === 0" class="no-data">
       <div class="no-data-icon">📊</div>
       <h3>Aucune donnée disponible</h3>
-      <p>Les statistiques de visite apparaîtront ici une fois que les utilisateurs commenceront à naviguer sur le site.</p>
-      
+      <p>Les statistiques de visite apparaîtront ici une fois que les utilisateurs commenceront à naviguer sur le site.
+      </p>
+
       <!-- Section d'import -->
       <div class="import-section">
         <h4>Importer des données</h4>
         <div class="file-input-group">
-          <input 
-            type="file" 
-            id="fileInput"
-            accept=".json"
-            (change)="onFileSelected($event)"
-            class="file-input"
-          >
+          <input type="file" id="fileInput" accept=".json" (change)="onFileSelected($event)" class="file-input">
           <label for="fileInput" class="file-label">
             <span class="icon">📁</span>
             {{ selectedFile ? selectedFile.name : 'Choisir un fichier JSON' }}
           </label>
-          <button 
-            class="btn btn-primary" 
-            (click)="importData()"
-            [disabled]="!selectedFile"
-          >
+          <button class="btn btn-primary" (click)="importData()" [disabled]="!selectedFile">
             <span class="icon">📤</span>
             Importer
           </button>
@@ -137,10 +122,7 @@
             </td>
             <td class="percentage-column">
               <div class="percentage-bar">
-                <div 
-                  class="percentage-fill" 
-                  [style.width.%]="getVisitPercentage(page.visits)"
-                ></div>
+                <div class="percentage-fill" [style.width.%]="getVisitPercentage(page.visits)"></div>
                 <span class="percentage-text">{{ getVisitPercentage(page.visits) | number:'1.1-1' }}%</span>
               </div>
             </td>

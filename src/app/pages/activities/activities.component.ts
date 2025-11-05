@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
-import { DataService } from '../../services/data.service';
+import { ActivityService } from '../../services/activity.service';
 import { Activity } from '../../models/activity.interface';
 
 @Component({
@@ -17,7 +17,7 @@ export class ActivitiesComponent implements OnInit {
 
   constructor(
     private seoService: SeoService,
-    private dataService: DataService
+    private activityService: ActivityService
   ) { }
 
   ngOnInit() {
@@ -32,10 +32,20 @@ export class ActivitiesComponent implements OnInit {
   }
 
   loadActivities() {
-    // Simulate async call (ready for backend integration)
-    setTimeout(() => {
-      this.activities = this.dataService.getActivities() as Activity[];
-      this.isLoading = false;
-    }, 300);
+    this.isLoading = true;
+    this.activityService.getAllActivities().subscribe({
+      next: (response) => {
+        if (response.status === 'success') {
+          this.activities = response.data;
+        }
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading activities:', error);
+        this.isLoading = false;
+        // Fallback: empty array or show error message
+        this.activities = [];
+      }
+    });
   }
 }

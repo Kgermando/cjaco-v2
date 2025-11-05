@@ -85,7 +85,7 @@
                 <!-- Main Articles (8 columns) -->
                 <div class="articles-main">
                     <article class="article-card" *ngFor="let related of relatedActivities.slice(0, 2)">
-                        <a [routerLink]="['/activities', related.id]" class="card-link">
+                        <a [routerLink]="['/activities', related.slug]" class="card-link">
                             <div class="card-image" *ngIf="related.image">
                                 <img [src]="related.image" [alt]="related.title">
                             </div>
@@ -111,7 +111,7 @@
                 <!-- Sidebar Articles (4 columns) -->
                 <aside class="articles-sidebar" *ngIf="relatedActivities.length > 2">
                     <article class="article-card-mini" *ngFor="let related of relatedActivities.slice(2, 5)">
-                        <a [routerLink]="['/activities', related.id]" class="card-mini-link">
+                        <a [routerLink]="['/activities', related.slug]" class="card-mini-link">
                             <div class="card-mini-image" *ngIf="related.image">
                                 <img [src]="related.image" [alt]="related.title">
                             </div>

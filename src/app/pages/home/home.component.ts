@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SeoService } from '../../services/seo.service';
-import { DataService } from '../../services/data.service';
+import { ActivityService } from '../../services/activity.service';
 import { Activity } from '../../models/activity.interface';
 
 @Component({
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private seoService: SeoService,
-    private dataService: DataService
+    private activityService: ActivityService
   ) { }
 
   ngOnInit() {
@@ -93,8 +93,17 @@ export class HomeComponent implements OnInit {
   }
 
   loadRecentActivities() {
-    // Récupérer toutes les activités et prendre les 3 dernières
-    const allActivities = this.dataService.getActivities();
-    this.recentActivities = allActivities.slice(-3).reverse(); // Les 3 dernières, en ordre inverse
+    // Récupérer les 3 dernières activités depuis l'API
+    this.activityService.getLimitedActivities().subscribe({
+      next: (response) => {
+        if (response.status === 'success') {
+          this.recentActivities = response.data;
+        }
+      },
+      error: (error) => {
+        console.error('Error loading recent activities:', error);
+        this.recentActivities = [];
+      }
+    });
   }
 }

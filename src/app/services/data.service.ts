@@ -204,72 +204,72 @@ export class DataService {
     };
   }
 
-  getActivities(): Activity[] {
-    return [
-      {
-        id: 'participation-autochtones',
-        title: 'Participation des populations autochtones',
-        category: 'Gouvernance',
-        shortDescription: 'Des communautés d\'exclus sont sensibilisées et participent au processus de gouvernance par leurs votes.',
-        description: 'Ce projet vise à renforcer la participation citoyenne des populations autochtones marginalisées dans les processus démocratiques. À travers des campagnes de sensibilisation et d\'éducation civique, nous permettons à ces communautés de comprendre leurs droits et de participer activement aux élections et aux processus de gouvernance locale. Plus de 12,500 personnes ont été sensibilisées et 85% d\'entre elles ont participé aux dernières élections locales, contre seulement 35% précédemment.',
-        image: '/assets/images/projets/p1.jpg',
-        location: 'Kasaï, République Démocratique du Congo',
-        partners: ['Union Européenne', 'PNUD', 'Gouvernement Provincial du Kasaï'],
-        gallery: [
-          '/assets/images/projets/p1.jpg',
-          '/assets/images/projets/p2.jpg',
-          '/assets/images/about.png'
-        ],
-        relatedActivities: ['formation-gouvernance', 'plaidoyer-economique'],
-        date: '2022-01-15',
-        author: 'CJACO Team'
-      },
-      {
-        id: 'formation-gouvernance',
-        title: 'Formation à la gouvernance décentralisée',
-        category: 'Participation citoyenne',
-        shortDescription: 'Des jeunes comprennent et discutent activement de la gouvernance des entités décentralisées, donc leurs communautés directes.',
-        description: 'Programme complet de formation destiné aux jeunes pour comprendre et participer aux mécanismes de gouvernance décentralisée. Ce projet permet aux jeunes de s\'approprier les enjeux de développement de leurs communautés et de devenir des acteurs du changement au niveau local. 420 jeunes ont été formés et 12 clubs de gouvernance ont été créés dans les établissements d\'enseignement, touchant plus de 2,000 étudiants.',
-        image: '/assets/images/projets/p2.jpg',
-        location: 'Kinshasa et provinces, RDC',
-        partners: ['UNESCO', 'Ministère de la Jeunesse', 'Open Society Foundations'],
-        gallery: [
-          '/assets/images/projets/p2.jpg',
-          '/assets/images/projets/p1.jpg',
-          '/assets/images/about.png'
-        ],
-        relatedActivities: ['participation-autochtones', 'plaidoyer-economique'],
-        date: '2023-03-20',
-        author: 'CJACO Team'
-      },
-      {
-        id: 'plaidoyer-economique',
-        title: 'Plaidoyer pour les initiatives économiques privées',
-        category: 'Développement socio-économique',
-        shortDescription: 'Un plaidoyer pour le développement des initiatives économiques privées est lancé et des contacts sont établis avec l\'autorité publique pour la matérialisation des dispositions.',
-        description: 'Initiative de plaidoyer visant à créer un environnement favorable au développement des petites et moyennes entreprises. Ce projet travaille avec les autorités publiques pour simplifier les procédures administratives, faciliter l\'accès au financement et créer des opportunités d\'entrepreneuriat pour les jeunes et les femmes. 3 réformes réglementaires importantes ont été adoptées. 780 entrepreneurs ont été formés et 145 startups accompagnées, créant plus de 600 emplois.',
-        image: '/assets/images/about.png',
-        location: 'Kinshasa et villes principales, RDC',
-        partners: ['Agence Française de Développement', 'Ministère des PME', 'Banque Mondiale', 'Chambre de Commerce'],
-        gallery: [
-          '/assets/images/about.png',
-          '/assets/images/projets/p1.jpg',
-          '/assets/images/projets/p2.jpg'
-        ],
-        relatedActivities: ['formation-gouvernance', 'participation-autochtones'],
-        date: '2023-06-10',
-        author: 'CJACO Team'
-      }
-    ];
-  }
+  // getActivities(): Activity[] {
+  //   return [
+  //     {
+  //       id: 'participation-autochtones',
+  //       title: 'Participation des populations autochtones',
+  //       category: 'Gouvernance',
+  //       shortDescription: 'Des communautés d\'exclus sont sensibilisées et participent au processus de gouvernance par leurs votes.',
+  //       description: 'Ce projet vise à renforcer la participation citoyenne des populations autochtones marginalisées dans les processus démocratiques. À travers des campagnes de sensibilisation et d\'éducation civique, nous permettons à ces communautés de comprendre leurs droits et de participer activement aux élections et aux processus de gouvernance locale. Plus de 12,500 personnes ont été sensibilisées et 85% d\'entre elles ont participé aux dernières élections locales, contre seulement 35% précédemment.',
+  //       image: '/assets/images/projets/p1.jpg',
+  //       location: 'Kasaï, République Démocratique du Congo',
+  //       partners: ['Union Européenne', 'PNUD', 'Gouvernement Provincial du Kasaï'],
+  //       gallery: [
+  //         '/assets/images/projets/p1.jpg',
+  //         '/assets/images/projets/p2.jpg',
+  //         '/assets/images/about.png'
+  //       ],
+  //       relatedActivities: ['formation-gouvernance', 'plaidoyer-economique'],
+  //       date: '2022-01-15',
+  //       author: 'CJACO Team'
+  //     },
+  //     {
+  //       id: 'formation-gouvernance',
+  //       title: 'Formation à la gouvernance décentralisée',
+  //       category: 'Participation citoyenne',
+  //       shortDescription: 'Des jeunes comprennent et discutent activement de la gouvernance des entités décentralisées, donc leurs communautés directes.',
+  //       description: 'Programme complet de formation destiné aux jeunes pour comprendre et participer aux mécanismes de gouvernance décentralisée. Ce projet permet aux jeunes de s\'approprier les enjeux de développement de leurs communautés et de devenir des acteurs du changement au niveau local. 420 jeunes ont été formés et 12 clubs de gouvernance ont été créés dans les établissements d\'enseignement, touchant plus de 2,000 étudiants.',
+  //       image: '/assets/images/projets/p2.jpg',
+  //       location: 'Kinshasa et provinces, RDC',
+  //       partners: ['UNESCO', 'Ministère de la Jeunesse', 'Open Society Foundations'],
+  //       gallery: [
+  //         '/assets/images/projets/p2.jpg',
+  //         '/assets/images/projets/p1.jpg',
+  //         '/assets/images/about.png'
+  //       ],
+  //       relatedActivities: ['participation-autochtones', 'plaidoyer-economique'],
+  //       date: '2023-03-20',
+  //       author: 'CJACO Team'
+  //     },
+  //     {
+  //       id: 'plaidoyer-economique',
+  //       title: 'Plaidoyer pour les initiatives économiques privées',
+  //       category: 'Développement socio-économique',
+  //       shortDescription: 'Un plaidoyer pour le développement des initiatives économiques privées est lancé et des contacts sont établis avec l\'autorité publique pour la matérialisation des dispositions.',
+  //       description: 'Initiative de plaidoyer visant à créer un environnement favorable au développement des petites et moyennes entreprises. Ce projet travaille avec les autorités publiques pour simplifier les procédures administratives, faciliter l\'accès au financement et créer des opportunités d\'entrepreneuriat pour les jeunes et les femmes. 3 réformes réglementaires importantes ont été adoptées. 780 entrepreneurs ont été formés et 145 startups accompagnées, créant plus de 600 emplois.',
+  //       image: '/assets/images/about.png',
+  //       location: 'Kinshasa et villes principales, RDC',
+  //       partners: ['Agence Française de Développement', 'Ministère des PME', 'Banque Mondiale', 'Chambre de Commerce'],
+  //       gallery: [
+  //         '/assets/images/about.png',
+  //         '/assets/images/projets/p1.jpg',
+  //         '/assets/images/projets/p2.jpg'
+  //       ],
+  //       relatedActivities: ['formation-gouvernance', 'participation-autochtones'],
+  //       date: '2023-06-10',
+  //       author: 'CJACO Team'
+  //     }
+  //   ];
+  // }
 
-  getActivityById(id: string) {
-    const activities = this.getActivities();
-    // Chercher d'abord par ID, puis par titre
-    return activities.find(activity => 
-      activity.id === id || activity.title === id
-    );
-  }
+  // getActivityById(id: string) {
+  //   const activities = this.getActivities();
+  //   // Chercher d'abord par ID, puis par titre
+  //   return activities.find(activity => 
+  //     activity.id === id || activity.title === id
+  //   );
+  // }
 
   constructor() { }
 }

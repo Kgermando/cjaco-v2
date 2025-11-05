@@ -20,7 +20,7 @@
       <!-- Activities Grid -->
       <div class="projects-grid" *ngIf="!isLoading && activities.length > 0">
         <article class="project-card" *ngFor="let activity of activities">
-          <a [routerLink]="['/activities', activity.title]" class="card-link">
+          <a [routerLink]="['/activities', activity.slug]" class="card-link">
             <div class="card-image">
               <img [src]="activity.image" [alt]="activity.title">
             </div>

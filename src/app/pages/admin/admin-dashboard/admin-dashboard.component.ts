@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../../services/auth.service';
 import { HybridAnalyticsService, PageVisit } from '../../../services/hybrid-analytics.service';
 import { DemoDataService } from '../../../services/demo-data.service';
 
@@ -22,11 +20,10 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   storageInfo: { mode: string; available: boolean } = { mode: 'Unknown', available: false };
 
   constructor(
-    private authService: AuthService,
     private analyticsService: HybridAnalyticsService,
-    private demoDataService: DemoDataService,
-    private router: Router
+    private demoDataService: DemoDataService
   ) {}
+  
   ngOnInit(): void {
     this.loadAnalytics();
     this.storageInfo = this.analyticsService.getStorageInfo();
@@ -44,16 +41,12 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  
   loadAnalytics(): void {
     this.pageVisits = this.analyticsService.getAnalytics().sort((a: PageVisit, b: PageVisit) => b.visits - a.visits);
     this.totalVisits = this.analyticsService.getTotalVisits();
     this.mostVisitedPage = this.analyticsService.getMostVisitedPage();
     this.analyticsService.loadAnalytics();
-  }
-
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/admin/login']);
   }
   clearAnalytics(): void {
     if (confirm('Êtes-vous sûr de vouloir effacer toutes les statistiques ?')) {

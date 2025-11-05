@@ -7,7 +7,9 @@ import { ActivityViewComponent } from './pages/activities/activity-view/activity
 import { ContactComponent } from './pages/contact/contact.component';
 import { DonateComponent } from './pages/donate/donate.component';
 import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.component';
+import { AdminLayoutComponent } from './pages/admin/admin-layout/admin-layout.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { AdminActivitiesComponent } from './pages/admin/admin-activities/admin-activities.component';
 import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
@@ -51,14 +53,26 @@ export const routes: Routes = [
     title: 'Administration - Connexion | CJACO'
   },
   {
-    path: 'admin/dashboard',
-    component: AdminDashboardComponent,
-    canActivate: [AdminGuard],
-    title: 'Administration - Tableau de bord | CJACO'
-  },
-  {
     path: 'admin',
-    redirectTo: 'admin/dashboard'
+    component: AdminLayoutComponent,
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: AdminDashboardComponent,
+        title: 'Administration - Tableau de bord | CJACO'
+      },
+      {
+        path: 'activities',
+        component: AdminActivitiesComponent,
+        title: 'Administration - Gestion des Activités | CJACO'
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '**',

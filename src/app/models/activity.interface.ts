@@ -1,5 +1,5 @@
 export interface Activity {
-  id: string;
+  slug: string;
   title: string;
   category: string;
   shortDescription: string;
@@ -11,4 +11,6 @@ export interface Activity {
   relatedActivities?: string[];
   date?: string;
   author?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
