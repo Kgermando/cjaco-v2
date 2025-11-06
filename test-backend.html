@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Backend Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Backend API Connection</h1>
+    
+    <div class="test-section">
+        <h2>1. Test Activities Endpoint</h2>
+        <button onclick="testGetActivities()">GET /activities/all/paginate</button>
+        <div id="result-get"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Test Create Activity Endpoint</h2>
+        <button onclick="testCreateActivity()">POST /activities/create</button>
+        <div id="result-create"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. API Configuration</h2>
+        <p>Base URL: <strong id="api-url">http://localhost:8000/api</strong></p>
+        <p>Activities Endpoint: <strong id="activities-endpoint"></strong></p>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000/api';
+        const ACTIVITIES_URL = `${API_URL}/cjaco/activities`;
+
+        document.getElementById('api-url').textContent = API_URL;
+        document.getElementById('activities-endpoint').textContent = ACTIVITIES_URL;
+
+        async function testGetActivities() {
+            const resultDiv = document.getElementById('result-get');
+            resultDiv.innerHTML = '<p>Testing...</p>';
+            
+            try {
+                const response = await fetch(`${ACTIVITIES_URL}/all/paginate?page=1&page_size=9`);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <p class="success">✓ Success! Status: ${response.status}</p>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <p class="error">✗ Error: ${error.message}</p>
+                    <pre>${error.stack}</pre>
+                `;
+            }
+        }
+
+        async function testCreateActivity() {
+            const resultDiv = document.getElementById('result-create');
+            resultDiv.innerHTML = '<p>Testing...</p>';
+            
+            const formData = new FormData();
+            formData.append('title', 'Test Activity ' + Date.now());
+            formData.append('category', 'Education');
+            formData.append('shortDescription', 'This is a test short description for the activity');
+            formData.append('description', 'This is a longer test description for the activity. It needs to be at least 50 characters long to pass validation.');
+            formData.append('date', new Date().toISOString().split('T')[0]);
+            
+            // Create a dummy image blob
+            const canvas = document.createElement('canvas');
+            canvas.width = 100;
+            canvas.height = 100;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(0, 0, 100, 100);
+            
+            canvas.toBlob(async (blob) => {
+                formData.append('image', blob, 'test-image.png');
+                
+                try {
+                    console.log('=== Sending request to:', `${ACTIVITIES_URL}/create`);
+                    console.log('=== FormData contents:');
+                    for (let [key, value] of formData.entries()) {
+                        console.log(key, value);
+                    }
+                    
+                    const response = await fetch(`${ACTIVITIES_URL}/create`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    console.log('=== Response status:', response.status);
+                    console.log('=== Response headers:', response.headers);
+                    
+                    const contentType = response.headers.get('content-type');
+                    let data;
+                    
+                    if (contentType && contentType.includes('application/json')) {
+                        data = await response.json();
+                    } else {
+                        data = await response.text();
+                    }
+                    
+                    if (response.ok) {
+                        resultDiv.innerHTML = `
+                            <p class="success">✓ Success! Status: ${response.status}</p>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `
+                            <p class="error">✗ Error! Status: ${response.status}</p>
+                            <pre>${typeof data === 'string' ? data : JSON.stringify(data, null, 2)}</pre>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('=== Fetch error:', error);
+                    resultDiv.innerHTML = `
+                        <p class="error">✗ Network Error: ${error.message}</p>
+                        <p>Possible causes:</p>
+                        <ul>
+                            <li>Backend server is not running</li>
+                            <li>CORS issues</li>
+                            <li>Wrong API URL</li>
+                            <li>Network connectivity issues</li>
+                        </ul>
+                        <pre>${error.stack}</pre>
+                    `;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
