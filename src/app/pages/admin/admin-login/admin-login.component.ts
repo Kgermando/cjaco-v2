@@ -18,7 +18,6 @@ export class AdminLoginComponent {
   entreprise = '';
   errorMessage = '';
   isLoading = false;
-  useStaticLogin = true; // Toggle pour tester méthode statique ou dynamique
 
   constructor(
     private authService: AuthService,
@@ -39,29 +38,6 @@ export class AdminLoginComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    if (this.useStaticLogin) {
-      // Méthode statique avec identifiants par défaut
-      this.loginStatic();
-    } else {
-      // Méthode dynamique avec backend
-      this.loginDynamic();
-    }
-  }
-
-  private loginStatic(): void {
-    // Simulation avec identifiants statiques (admin/admin123)
-    setTimeout(() => {
-      if (this.email === 'admin@admin.com' && this.password === 'Admin@2025!') {
-        // Simuler une réponse de connexion réussie
-        this.router.navigate(['/admin/dashboard']);
-      } else {
-        this.errorMessage = 'Identifiants incorrects (utilisez admin@admin.com / Admin@2025!)';
-      }
-      this.isLoading = false;
-    }, 1000);
-  }
-
-  private loginDynamic(): void {
     const loginData: Login = {
       email: this.email,
       password: this.password,
@@ -80,13 +56,5 @@ export class AdminLoginComponent {
         this.isLoading = false;
       }
     });
-  }
-
-  toggleLoginMethod(): void {
-    this.useStaticLogin = !this.useStaticLogin;
-    this.errorMessage = '';
-    this.email = '';
-    this.password = '';
-    this.entreprise = '';
   }
 }

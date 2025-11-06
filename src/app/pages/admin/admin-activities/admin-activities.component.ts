@@ -56,7 +56,7 @@ export class AdminActivitiesComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(50)]],
       location: [''],
       author: [''],
-      date: [new Date(), Validators.required],
+      date: [new Date().toISOString().split('T')[0], Validators.required],
       partners: [''],
       relatedActivities: ['']
     });
@@ -90,12 +90,18 @@ export class AdminActivitiesComponent implements OnInit {
     this.imageFile = null;
     this.galleryFiles = [];
     this.imagePreview = null;
+    this.resetFileInputs();
     this.showModal.set(true);
   }
 
   openEditModal(activity: Activity): void {
     this.isEditMode.set(true);
     this.currentActivity.set(activity);
+    
+    // Réinitialiser les fichiers avant d'ouvrir le modal en mode édition
+    this.imageFile = null;
+    this.galleryFiles = [];
+    this.resetFileInputs();
     
     this.activityForm.patchValue({
       title: activity.title,
@@ -119,6 +125,17 @@ export class AdminActivitiesComponent implements OnInit {
     this.imageFile = null;
     this.galleryFiles = [];
     this.imagePreview = null;
+    
+    // Réinitialiser les inputs de fichiers
+    this.resetFileInputs();
+  }
+
+  private resetFileInputs(): void {
+    const imageInput = document.getElementById('image') as HTMLInputElement;
+    const galleryInput = document.getElementById('gallery') as HTMLInputElement;
+    
+    if (imageInput) imageInput.value = '';
+    if (galleryInput) galleryInput.value = ''; 
   }
 
   onImageSelect(event: Event): void {
@@ -143,8 +160,23 @@ export class AdminActivitiesComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log('=== SUBMIT STARTED ===');
+    console.log('Form valid:', this.activityForm.valid);
+    console.log('Form value:', this.activityForm.value);
+    console.log('Is Edit Mode:', this.isEditMode());
+    console.log('Image File:', this.imageFile);
+    console.log('Gallery Files:', this.galleryFiles);
+
     if (this.activityForm.invalid) {
+      console.log('Form errors:', this.activityForm.errors);
+      Object.keys(this.activityForm.controls).forEach(key => {
+        const control = this.activityForm.get(key);
+        if (control?.errors) {
+          console.log(`${key} errors:`, control.errors);
+        }
+      });
       this.activityForm.markAllAsTouched();
+      alert('Veuillez remplir tous les champs requis correctement.');
       return;
     }
 
@@ -163,6 +195,9 @@ export class AdminActivitiesComponent implements OnInit {
       partners: formValue.partners ? formValue.partners.split(';').map((p: string) => p.trim()).filter((p: string) => p) : [],
       relatedActivities: formValue.relatedActivities ? formValue.relatedActivities.split(';').map((r: string) => r.trim()).filter((r: string) => r) : []
     };
+
+    console.log('=== Activity Data ===');
+    console.log(activityData);
 
     const formData = this.activityService.createFormData(
       activityData,
@@ -184,8 +219,8 @@ export class AdminActivitiesComponent implements OnInit {
             console.log('Update response:', response);
             if (response.status === 'success') {
               alert('Activité mise à jour avec succès!');
-              this.closeModal();
               this.loadActivities();
+              this.closeModal();
             } else {
               alert(`Erreur: ${response.message || 'Réponse inattendue du serveur'}`);
             }
@@ -200,38 +235,52 @@ export class AdminActivitiesComponent implements OnInit {
         });
     } else {
       // Create
-      console.log('Sending create request to:', this.activityService['apiUrl']);
+      const apiUrl = this.activityService['apiUrl'];
+      console.log('=== CREATE REQUEST ===');
+      console.log('API URL:', apiUrl);
+      console.log('Full endpoint:', `${apiUrl}/create`);
+      
       this.activityService.createActivity(formData)
         .subscribe({
           next: (response) => {
-            console.log('Create response:', response);
+            console.log('=== CREATE SUCCESS ===');
+            console.log('Response:', response);
             if (response.status === 'success') {
               alert('Activité créée avec succès!');
-              this.closeModal();
               this.loadActivities();
+              this.closeModal();
             } else {
               alert(`Erreur: ${response.message || 'Réponse inattendue du serveur'}`);
             }
             this.loading.set(false);
           },
           error: (error) => {
-            console.error('=== Error Details ===');
+            console.error('=== CREATE ERROR ===');
+            console.error('Full error object:', error);
             console.error('Status:', error.status);
             console.error('Status Text:', error.statusText);
-            console.error('Error:', error.error);
+            console.error('Error body:', error.error);
             console.error('Message:', error.message);
+            console.error('URL:', error.url);
             
             let errorMsg = 'Erreur de connexion au serveur';
             if (error.error?.message) {
               errorMsg = error.error.message;
             } else if (error.status === 0) {
-              errorMsg = 'Impossible de contacter le serveur. Vérifiez que l\'API est accessible.';
+              errorMsg = 'Impossible de contacter le serveur. Vérifiez que l\'API est accessible à ' + apiUrl;
             } else if (error.status === 404) {
-              errorMsg = 'Endpoint non trouvé (404). Vérifiez l\'URL de l\'API.';
+              errorMsg = 'Endpoint non trouvé (404). URL: ' + error.url;
+            } else if (error.status === 422) {
+              errorMsg = 'Données invalides (422). Vérifiez les champs du formulaire.';
+              if (error.error?.errors) {
+                console.error('Validation errors:', error.error.errors);
+                errorMsg += '\n' + JSON.stringify(error.error.errors, null, 2);
+              }
             } else if (error.status >= 500) {
               errorMsg = `Erreur serveur (${error.status}): ${error.statusText}`;
             }
             
+            console.error('Final error message:', errorMsg);
             alert(`Erreur lors de la création: ${errorMsg}`);
             this.loading.set(false);
           }

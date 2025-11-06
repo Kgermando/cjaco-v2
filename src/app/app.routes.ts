@@ -35,7 +35,7 @@ export const routes: Routes = [
     title: 'Nos Activités - CJACO | Programmes et Projets'
   },
   {
-    path: 'activities/:title',
+    path: 'activities/:slug',
     component: ActivityViewComponent,
     title: 'Détails de l\'Activité - CJACO | Informations Complètes'
   },
