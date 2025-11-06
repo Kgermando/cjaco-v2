@@ -21,8 +21,8 @@
     {
       "page": "/",
       "title": "CJACO - Construire un Avenir Durable | ONG Développement International",
-      "visits": 9,
-      "lastVisited": "2025-11-05T13:31:35.833Z"
+      "visits": 10,
+      "lastVisited": "2025-11-05T18:15:29.461Z"
     },
     {
       "page": "/activities/plaidoyer-economique",
@@ -45,15 +45,27 @@
     {
       "page": "/admin/dashboard",
       "title": "Administration - Tableau de bord | CJACO",
-      "visits": 6,
-      "lastVisited": "2025-11-05T14:51:09.668Z"
+      "visits": 9,
+      "lastVisited": "2025-11-06T09:51:55.540Z"
     },
     {
       "page": "/admin/activities",
       "title": "Administration - Gestion des Activités | CJACO",
-      "visits": 9,
-      "lastVisited": "2025-11-05T16:23:51.689Z"
+      "visits": 19,
+      "lastVisited": "2025-11-06T09:52:17.559Z"
+    },
+    {
+      "page": "/admin/login",
+      "title": "Administration - Connexion | CJACO",
+      "visits": 8,
+      "lastVisited": "2025-11-06T09:51:06.024Z"
+    },
+    {
+      "page": "/admin/users",
+      "title": "Administration - Gestion des Utilisateurs | CJACO",
+      "visits": 4,
+      "lastVisited": "2025-11-06T09:52:16.705Z"
     }
   ],
-  "lastUpdated": "2025-11-05T16:23:51.689Z"
+  "lastUpdated": "2025-11-06T09:52:17.559Z"
 }

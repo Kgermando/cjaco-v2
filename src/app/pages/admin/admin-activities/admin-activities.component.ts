@@ -56,7 +56,7 @@ export class AdminActivitiesComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(50)]],
       location: [''],
       author: [''],
-      date: [''],
+      date: [new Date(), Validators.required],
       partners: [''],
       relatedActivities: ['']
     });
@@ -104,7 +104,7 @@ export class AdminActivitiesComponent implements OnInit {
       description: activity.description,
       location: activity.location || '',
       author: activity.author || '',
-      date: activity.date ? new Date(activity.date).toISOString().split('T')[0] : '',
+      date: activity.date ? new Date(activity.date) : new Date(),
       partners: activity.partners?.join(';') || '',
       relatedActivities: activity.relatedActivities?.join(';') || ''
     });

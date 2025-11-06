@@ -3,18 +3,33 @@
     <div class="login-header">
       <h2>Administration CJACO</h2>
       <p>Connexion à l'interface d'administration</p>
+      
+      <!-- Toggle pour choisir la méthode de connexion -->
+      <div class="login-method-toggle">
+        <button 
+          type="button" 
+          class="toggle-btn"
+          (click)="toggleLoginMethod()"
+          [disabled]="isLoading"
+        >
+          {{ useStaticLogin ? 'Utiliser Backend' : 'Utiliser Statique' }}
+        </button>
+        <small class="method-info">
+          Mode: {{ useStaticLogin ? 'Statique (démo)' : 'Backend API' }}
+        </small>
+      </div>
     </div>
     
     <form (ngSubmit)="onSubmit()" class="login-form">
       <div class="form-group">
-        <label for="username">Nom d'utilisateur</label>
+        <label for="email">Email</label>
         <input
-          type="text"
-          id="username"
-          [(ngModel)]="username"
-          name="username"
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
           class="form-control"
-          placeholder="Entrez votre nom d'utilisateur"
+          placeholder="Entrez votre email"
           [disabled]="isLoading"
           required
         >
@@ -33,9 +48,32 @@
           required
         >
       </div>
+
+      <!-- Champ entreprise pour le mode backend -->
+      <div class="form-group" *ngIf="!useStaticLogin">
+        <label for="entreprise">Entreprise</label>
+        <input
+          type="text"
+          id="entreprise"
+          [(ngModel)]="entreprise"
+          name="entreprise"
+          class="form-control"
+          placeholder="Nom de l'entreprise (optionnel)"
+          [disabled]="isLoading"
+        >
+      </div>
       
       <div class="error-message" *ngIf="errorMessage">
         {{ errorMessage }}
+      </div>
+
+      <!-- Informations de connexion pour le mode statique -->
+      <div class="demo-credentials" *ngIf="useStaticLogin">
+        <small>
+          <strong>Identifiants de démonstration:</strong><br>
+          Email: admin&#64;admin.com<br>
+          Mot de passe: Admin&#64;2025!
+        </small>
       </div>
       
       <button 

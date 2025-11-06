@@ -1,0 +1,441 @@
+<div class="admin-users-container">
+  <div class="page-header">
+    <h1>Gestion des Utilisateurs</h1>
+    <button class="btn btn-primary" (click)="openCreateModal()">
+      <i class="icon-plus"></i>
+      Nouvel Utilisateur
+    </button>
+  </div>
+
+  <!-- Search and filters -->
+  <div class="search-section">
+    <div class="search-bar">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        (keyup.enter)="onSearch()"
+        placeholder="Rechercher par nom, email..."
+        class="search-input"
+      >
+      <button class="btn btn-secondary" (click)="onSearch()">
+        <i class="icon-search"></i>
+        Rechercher
+      </button>
+      <button class="btn btn-outline" (click)="searchTerm = ''; loadUsers()">
+        <i class="icon-refresh"></i>
+        Actualiser
+      </button>
+    </div>
+  </div>
+
+  <!-- Error message -->
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Loading state -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement des utilisateurs...</p>
+  </div>
+
+  <!-- Users table -->
+  <div class="table-container" *ngIf="!loading">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>Nom complet</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Rôle</th>
+          <th>Statut</th>
+          <th>Entreprise</th>
+          <th>Date création</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users" class="user-row">
+          <td>
+            <div class="user-info">
+              <strong>{{ user.fullname }}</strong>
+              <small *ngIf="user.title">{{ user.title }}</small>
+            </div>
+          </td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone || '-' }}</td>
+          <td>
+            <span class="badge" [ngClass]="getRoleBadgeClass(user.role)">
+              {{ user.role }}
+            </span>
+            <small class="permission">{{ user.permission }}</small>
+          </td>
+          <td>
+            <span class="badge" [ngClass]="getStatusBadgeClass(user.status)">
+              {{ getStatusText(user.status) }}
+            </span>
+          </td>
+          <td>{{ user.entreprise }}</td>
+          <td>{{ user.createdAt | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <div class="action-buttons">
+              <button 
+                class="btn btn-sm btn-outline"
+                (click)="openEditModal(user)"
+                title="Modifier"
+              >
+                <i class="icon-edit"></i>
+              </button>
+              <button 
+                class="btn btn-sm"
+                [ngClass]="user.status ? 'btn-warning' : 'btn-success'"
+                (click)="toggleUserStatus(user)"
+                [title]="user.status ? 'Désactiver' : 'Activer'"
+              >
+                <i [class]="user.status ? 'icon-pause' : 'icon-play'"></i>
+              </button>
+              <button 
+                class="btn btn-sm btn-danger"
+                (click)="openDeleteModal(user)"
+                title="Supprimer"
+              >
+                <i class="icon-delete"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="users.length === 0">
+      <i class="icon-users"></i>
+      <h3>Aucun utilisateur trouvé</h3>
+      <p>{{ searchTerm ? 'Aucun résultat pour votre recherche.' : 'Commencez par créer un nouvel utilisateur.' }}</p>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-container" *ngIf="totalPages > 1">
+    <div class="pagination-info">
+      Affichage {{ getStartIndex() }} - {{ getDisplayedUsersCount() }} 
+      sur {{ totalUsers }} utilisateurs
+    </div>
+    <div class="pagination">
+      <button 
+        class="btn btn-sm"
+        [disabled]="currentPage <= 1"
+        (click)="onPageChange(currentPage - 1)"
+      >
+        Précédent
+      </button>
+      
+      <span class="page-numbers">
+        <button 
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+          class="btn btn-sm page-btn"
+          [ngClass]="{ 'active': (i + 1) === currentPage }"
+          (click)="onPageChange(i + 1)"
+        >
+          {{ i + 1 }}
+        </button>
+      </span>
+      
+      <button 
+        class="btn btn-sm"
+        [disabled]="currentPage >= totalPages"
+        (click)="onPageChange(currentPage + 1)"
+      >
+        Suivant
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Create User Modal -->
+<div class="modal-overlay" *ngIf="showCreateModal" (click)="closeModals()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Créer un Utilisateur</h2>
+      <button class="close-btn" (click)="closeModals()">&times;</button>
+    </div>
+    
+    <form [formGroup]="createForm" (ngSubmit)="onCreateSubmit()">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fullname">Nom complet *</label>
+            <input
+              id="fullname"
+              type="text"
+              formControlName="fullname"
+              class="form-control"
+              [class.error]="createForm.get('fullname')?.invalid && createForm.get('fullname')?.touched"
+            >
+            <div class="error-text" *ngIf="createForm.get('fullname')?.invalid && createForm.get('fullname')?.touched">
+              Le nom complet est requis (min. 2 caractères)
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="form-control"
+              [class.error]="createForm.get('email')?.invalid && createForm.get('email')?.touched"
+            >
+            <div class="error-text" *ngIf="createForm.get('email')?.invalid && createForm.get('email')?.touched">
+              Veuillez saisir un email valide
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input
+              id="phone"
+              type="tel"
+              formControlName="phone"
+              class="form-control"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="title">Titre</label>
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              class="form-control"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Mot de passe *</label>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              class="form-control"
+              [class.error]="createForm.get('password')?.invalid && createForm.get('password')?.touched"
+            >
+            <div class="error-text" *ngIf="createForm.get('password')?.invalid && createForm.get('password')?.touched">
+              Le mot de passe est requis (min. 6 caractères)
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="passwordConfirm">Confirmer le mot de passe *</label>
+            <input
+              id="passwordConfirm"
+              type="password"
+              formControlName="passwordConfirm"
+              class="form-control"
+              [class.error]="createForm.hasError('passwordMismatch') && createForm.get('passwordConfirm')?.touched"
+            >
+            <div class="error-text" *ngIf="createForm.hasError('passwordMismatch') && createForm.get('passwordConfirm')?.touched">
+              Les mots de passe ne correspondent pas
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="role">Rôle *</label>
+            <select
+              id="role"
+              formControlName="role"
+              class="form-control"
+            >
+              <option *ngFor="let role of userRoles" [value]="role">{{ role }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="permission">Permission *</label>
+            <select
+              id="permission"
+              formControlName="permission"
+              class="form-control"
+            >
+              <option *ngFor="let permission of userPermissions" [value]="permission">{{ permission }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="entreprise">Entreprise *</label>
+            <input
+              id="entreprise"
+              type="text"
+              formControlName="entreprise"
+              class="form-control"
+            >
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                formControlName="status"
+              >
+              <span class="checkbox-text">Utilisateur actif</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="closeModals()">
+          Annuler
+        </button>
+        <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="createForm.invalid || loading"
+        >
+          {{ loading ? 'Création...' : 'Créer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal-overlay" *ngIf="showEditModal" (click)="closeModals()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Modifier l'Utilisateur</h2>
+      <button class="close-btn" (click)="closeModals()">&times;</button>
+    </div>
+    
+    <form [formGroup]="editForm" (ngSubmit)="onEditSubmit()">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="edit-fullname">Nom complet *</label>
+            <input
+              id="edit-fullname"
+              type="text"
+              formControlName="fullname"
+              class="form-control"
+              [class.error]="editForm.get('fullname')?.invalid && editForm.get('fullname')?.touched"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="edit-email">Email *</label>
+            <input
+              id="edit-email"
+              type="email"
+              formControlName="email"
+              class="form-control"
+              [class.error]="editForm.get('email')?.invalid && editForm.get('email')?.touched"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="edit-phone">Téléphone</label>
+            <input
+              id="edit-phone"
+              type="tel"
+              formControlName="phone"
+              class="form-control"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="edit-title">Titre</label>
+            <input
+              id="edit-title"
+              type="text"
+              formControlName="title"
+              class="form-control"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="edit-role">Rôle *</label>
+            <select
+              id="edit-role"
+              formControlName="role"
+              class="form-control"
+            >
+              <option *ngFor="let role of userRoles" [value]="role">{{ role }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-permission">Permission *</label>
+            <select
+              id="edit-permission"
+              formControlName="permission"
+              class="form-control"
+            >
+              <option *ngFor="let permission of userPermissions" [value]="permission">{{ permission }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="edit-entreprise">Entreprise *</label>
+            <input
+              id="edit-entreprise"
+              type="text"
+              formControlName="entreprise"
+              class="form-control"
+            >
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                formControlName="status"
+              >
+              <span class="checkbox-text">Utilisateur actif</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="closeModals()">
+          Annuler
+        </button>
+        <button 
+          type="submit" 
+          class="btn btn-primary"
+          [disabled]="editForm.invalid || loading"
+        >
+          {{ loading ? 'Mise à jour...' : 'Mettre à jour' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-overlay" *ngIf="showDeleteModal" (click)="closeModals()">
+  <div class="modal-content small-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Confirmer la suppression</h2>
+      <button class="close-btn" (click)="closeModals()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <p>Êtes-vous sûr de vouloir supprimer l'utilisateur <strong>{{ selectedUser?.fullname }}</strong> ?</p>
+      <p class="warning-text">Cette action est irréversible.</p>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="closeModals()">
+        Annuler
+      </button>
+      <button 
+        class="btn btn-danger"
+        (click)="onDeleteConfirm()"
+        [disabled]="loading"
+      >
+        {{ loading ? 'Suppression...' : 'Supprimer' }}
+      </button>
+    </div>
+  </div>
+</div>

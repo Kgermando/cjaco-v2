@@ -78,9 +78,7 @@ export class ActivityService {
     if (activity.author) formData.append('author', activity.author);
     
     if (activity.date) {
-      const dateStr = typeof activity.date === 'string'
-        ? activity.date.split('T')[0]
-        : new Date(activity.date).toISOString().split('T')[0];
+      const dateStr = new Date(activity.date).toISOString().split('T')[0];
       formData.append('date', dateStr);
     }
 

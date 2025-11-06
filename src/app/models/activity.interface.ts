@@ -9,7 +9,7 @@ export interface Activity {
   partners?: string[];
   gallery?: string[];
   relatedActivities?: string[];
-  date?: string;
+  date?: Date;
   author?: string;
   createdAt?: string;
   updatedAt?: string;

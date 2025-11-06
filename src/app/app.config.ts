@@ -4,8 +4,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
-import { loggingInterceptor } from './interceptors/logging.interceptor';
-
+ 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
@@ -21,8 +20,7 @@ export const appConfig: ApplicationConfig = {
     ), 
     provideClientHydration(withEventReplay()),
     provideHttpClient(
-      withFetch(),
-      withInterceptors([loggingInterceptor])
+      withFetch(), 
     )
   ]
 };

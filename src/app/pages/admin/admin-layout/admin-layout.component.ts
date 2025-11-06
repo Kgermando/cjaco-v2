@@ -31,12 +31,12 @@ export class AdminLayoutComponent {
       label: 'Activités',
       route: '/admin/activities'
     },
+    {
+      icon: '👥',
+      label: 'Utilisateurs',
+      route: '/admin/users'
+    },
     // Futures sections à ajouter
-    // {
-    //   icon: '👥',
-    //   label: 'Utilisateurs',
-    //   route: '/admin/users'
-    // },
     // {
     //   icon: '📧',
     //   label: 'Messages',

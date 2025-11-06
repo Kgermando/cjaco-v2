@@ -41,8 +41,45 @@
   
   p {
     color: #666;
-    margin: 0;
+    margin: 0 0 20px 0;
     font-size: 14px;
+  }
+
+  .login-method-toggle {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+
+    .toggle-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      transition: background-color 0.2s;
+      margin-bottom: 8px;
+
+      &:hover:not(:disabled) {
+        background: #0056b3;
+      }
+
+      &:disabled {
+        background: #6c757d;
+        cursor: not-allowed;
+      }
+    }
+
+    .method-info {
+      display: block;
+      color: #6c757d;
+      font-size: 11px;
+      margin-top: 5px;
+    }
   }
 }
 
@@ -93,6 +130,27 @@
     margin-bottom: 20px;
     font-size: 14px;
     border: 1px solid #fcc;
+  }
+
+  .demo-credentials {
+    background-color: #e7f3ff;
+    border: 1px solid #b3d7ff;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 20px;
+    text-align: center;
+
+    small {
+      color: #0056b3;
+      font-size: 12px;
+      line-height: 1.4;
+
+      strong {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+    }
   }
   
   .btn-login {

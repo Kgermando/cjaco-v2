@@ -10,6 +10,7 @@ import { AdminLoginComponent } from './pages/admin/admin-login/admin-login.compo
 import { AdminLayoutComponent } from './pages/admin/admin-layout/admin-layout.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { AdminActivitiesComponent } from './pages/admin/admin-activities/admin-activities.component';
+import { AdminUsersComponent } from './pages/admin/admin-users/admin-users.component';
 import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
@@ -66,6 +67,11 @@ export const routes: Routes = [
         path: 'activities',
         component: AdminActivitiesComponent,
         title: 'Administration - Gestion des Activités | CJACO'
+      },
+      {
+        path: 'users',
+        component: AdminUsersComponent,
+        title: 'Administration - Gestion des Utilisateurs | CJACO'
       },
       {
         path: '',
