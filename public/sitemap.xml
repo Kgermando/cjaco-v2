@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Page d'accueil -->
+  <url>
+    <loc>https://cjaco.org/</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Page À Propos -->
+  <url>
+    <loc>https://cjaco.org/about</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Page Organisation -->
+  <url>
+    <loc>https://cjaco.org/organisation</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Page Activités -->
+  <url>
+    <loc>https://cjaco.org/activities</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Activité spécifique : Participation des populations autochtones -->
+  <url>
+    <loc>https://cjaco.org/activities/participation-autochtones</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Page Contact -->
+  <url>
+    <loc>https://cjaco.org/contact</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Page Donation -->
+  <url>
+    <loc>https://cjaco.org/donate</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>

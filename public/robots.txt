@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /organisation
+Allow: /activities
+Allow: /contact
+Allow: /donate
+Allow: /assets/
+
+# Interdire l'accès aux pages d'administration
+Disallow: /admin/
+Disallow: /admin/login
+
+# Fichiers et dossiers techniques à exclure
+Disallow: /*.json$
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /dist/
+
+# Autoriser les moteurs de recherche à indexer les images et ressources
+Allow: /assets/images/
+Allow: /assets/videos/
+Allow: /assets/favicons/
+
+# Sitemap
+Sitemap: https://cjaco.org/sitemap.xml
+
+# Délai entre les requêtes (en secondes)
+Crawl-delay: 1

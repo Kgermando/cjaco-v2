@@ -237,6 +237,19 @@ app.get('/api/debug/paths', (req, res) => {
  */
 
 /**
+ * Serve robots.txt et sitemap.xml avec les bonnes en-têtes
+ */
+app.get('/robots.txt', (req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+  res.sendFile(resolve(browserDistFolder, 'robots.txt'));
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.setHeader('Content-Type', 'application/xml');
+  res.sendFile(resolve(browserDistFolder, 'sitemap.xml'));
+});
+
+/**
  * Serve static files from /browser
  */
 app.use(

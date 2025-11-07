@@ -11,12 +11,12 @@ import {
   UpdateUserInput, 
   ChangePasswordInput 
 } from '../models/user.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private readonly API_URL = 'http://localhost:8000/api/auth'; // Ajustez l'URL selon votre backend
+export class AuthService { 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   private currentUserSubject = new BehaviorSubject<UserResponse | null>(null);
@@ -51,7 +51,7 @@ export class AuthService {
 
   // Méthode de connexion avec le backend
   login(loginData: Login): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.API_URL}/login`, loginData)
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/login`, loginData)
       .pipe(
         tap(response => {
           if (response.data.token && this.isBrowser) {
@@ -87,21 +87,21 @@ export class AuthService {
 
   // Enregistrement d'un nouvel utilisateur
   register(userData: RegisterInput): Observable<ApiResponse<UserResponse>> {
-    return this.http.post<ApiResponse<UserResponse>>(`${this.API_URL}/register`, userData)
+    return this.http.post<ApiResponse<UserResponse>>(`${environment.apiUrl}/register`, userData)
       .pipe(catchError(this.handleError));
   }
 
   // Vérification du token
   verifyToken(token: string): Observable<UserResponse> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<UserResponse>(`${this.API_URL}/user?token=${token}`, { headers })
+    return this.http.get<UserResponse>(`${environment.apiUrl}/user?token=${token}`, { headers })
       .pipe(catchError(this.handleError));
   }
 
   // Mise à jour des informations utilisateur
   updateProfile(updateData: UpdateUserInput): Observable<ApiResponse<UserResponse>> {
     const token = this.getToken();
-    return this.http.put<ApiResponse<UserResponse>>(`${this.API_URL}/profil/info?token=${token}`, updateData)
+    return this.http.put<ApiResponse<UserResponse>>(`${environment.apiUrl}/profil/info?token=${token}`, updateData)
       .pipe(
         tap(response => {
           if (response.data) {
@@ -115,7 +115,7 @@ export class AuthService {
   // Changement de mot de passe
   changePassword(passwordData: ChangePasswordInput): Observable<ApiResponse<any>> {
     const token = this.getToken();
-    return this.http.put<ApiResponse<any>>(`${this.API_URL}/change-password?token=${token}`, {
+    return this.http.put<ApiResponse<any>>(`${environment.apiUrl}/change-password?token=${token}`, {
       old_password: passwordData.oldPassword,
       password: passwordData.password,
       password_confirm: passwordData.passwordConfirm
@@ -130,7 +130,7 @@ export class AuthService {
     this.isAuthenticatedSubject.next(false);
     
     // Appeler l'endpoint de logout du backend
-    this.http.post(`${this.API_URL}/logout`, {}).subscribe();
+    this.http.post(`${environment.apiUrl}/logout`, {}).subscribe();
   }
 
   isAuthenticated(): boolean {
