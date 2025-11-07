@@ -51,7 +51,7 @@ export class AuthService {
 
   // Méthode de connexion avec le backend
   login(loginData: Login): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${environment.apiUrl}/login`, loginData)
+    return this.http.post<LoginResponse>(`${environment.apiUrl}/auth/login`, loginData)
       .pipe(
         tap(response => {
           if (response.data.token && this.isBrowser) {
@@ -87,7 +87,7 @@ export class AuthService {
 
   // Enregistrement d'un nouvel utilisateur
   register(userData: RegisterInput): Observable<ApiResponse<UserResponse>> {
-    return this.http.post<ApiResponse<UserResponse>>(`${environment.apiUrl}/register`, userData)
+    return this.http.post<ApiResponse<UserResponse>>(`${environment.apiUrl}/auth/register`, userData)
       .pipe(catchError(this.handleError));
   }
 
@@ -115,7 +115,7 @@ export class AuthService {
   // Changement de mot de passe
   changePassword(passwordData: ChangePasswordInput): Observable<ApiResponse<any>> {
     const token = this.getToken();
-    return this.http.put<ApiResponse<any>>(`${environment.apiUrl}/change-password?token=${token}`, {
+    return this.http.put<ApiResponse<any>>(`${environment.apiUrl}/auth/change-password?token=${token}`, {
       old_password: passwordData.oldPassword,
       password: passwordData.password,
       password_confirm: passwordData.passwordConfirm
@@ -130,7 +130,7 @@ export class AuthService {
     this.isAuthenticatedSubject.next(false);
     
     // Appeler l'endpoint de logout du backend
-    this.http.post(`${environment.apiUrl}/logout`, {}).subscribe();
+    this.http.post(`${environment.apiUrl}/auth/logout`, {}).subscribe();
   }
 
   isAuthenticated(): boolean {
